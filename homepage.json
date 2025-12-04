@@ -1,0 +1,605 @@
+{
+  "app": {
+    "name": "HarvestHub",
+    "description": "Sustainable Urban Gardening Platform",
+    "version": "1.0.0",
+    "apiVersion": "v1"
+  },
+  
+  "homepage": {
+    "hero": {
+      "title": "Grow Food. Fight Hunger. Transform Communities.",
+      "subtitle": "HarvestHub empowers urban dwellers to grow their own food, contributing to UN Sustainable Development Goal 2: Zero Hunger",
+      "cta": {
+        "primary": "Start Your Garden Journey",
+        "secondary": "Explore Tutorials"
+      },
+      "missionStatement": "We believe everyone, regardless of space limitations, can contribute to sustainable food systems and combat food insecurity through urban gardening."
+    },
+    
+    "tutorialCategories": [
+      {
+        "id": "cat-1",
+        "name": "Container Gardening",
+        "icon": "fas fa-box",
+        "description": "Learn to grow food in pots, buckets, and containers",
+        "tutorialCount": 15,
+        "difficulty": "Beginner"
+      },
+      {
+        "id": "cat-2",
+        "name": "Vertical Gardening",
+        "icon": "fas fa-arrows-alt-v",
+        "description": "Maximize small spaces with vertical growing systems",
+        "tutorialCount": 12,
+        "difficulty": "Intermediate"
+      },
+      {
+        "id": "cat-3",
+        "name": "Balcony Farming",
+        "icon": "fas fa-building",
+        "description": "Transform your balcony into a productive garden",
+        "tutorialCount": 10,
+        "difficulty": "Beginner"
+      },
+      {
+        "id": "cat-4",
+        "name": "Indoor Hydroponics",
+        "icon": "fas fa-tint",
+        "description": "Soil-free growing for year-round harvests",
+        "tutorialCount": 8,
+        "difficulty": "Advanced"
+      }
+    ],
+    
+    "successStories": [
+      {
+        "id": "story-1",
+        "userName": "Maria Chen",
+        "userLocation": "New York, NY",
+        "userImage": "user-maria.jpg",
+        "story": "In my 400 sq ft apartment, I now grow 40% of my vegetables year-round. HarvestHub showed me how to use every inch of space efficiently!",
+        "achievements": [
+          "Grows 12 different vegetables",
+          "Saves $80/month on groceries",
+          "Shares surplus with neighbors"
+        ],
+        "beforeAfterImages": {
+          "before": "balcony-before.jpg",
+          "after": "balcony-after.jpg"
+        }
+      },
+      {
+        "id": "story-2",
+        "userName": "James Wilson",
+        "userLocation": "Chicago, IL",
+        "userImage": "user-james.jpg",
+        "story": "As a retired teacher, I turned my rooftop into a community teaching garden. We now supply fresh produce to a local shelter.",
+        "achievements": [
+          "Created community garden space",
+          "Feeds 15 families monthly",
+          "Trains urban gardeners"
+        ],
+        "beforeAfterImages": {
+          "before": "rooftop-before.jpg",
+          "after": "rooftop-after.jpg"
+        }
+      }
+    ],
+    
+    "impactStats": {
+      "totalUsers": 12543,
+      "gardensCreated": 9876,
+      "poundsProduced": 45210,
+      "mealsProvided": 180840,
+      "co2ReducedTons": 156,
+      "communitiesImpacted": 243
+    },
+    
+    "partners": [
+      {
+        "name": "UN Sustainable Development Goals",
+        "logo": "un-sdg-logo.png",
+        "description": "Aligned with Goal 2: Zero Hunger"
+      },
+      {
+        "name": "Urban Farming Institute",
+        "logo": "ufi-logo.png",
+        "description": "Educational partner for urban agriculture"
+      },
+      {
+        "name": "Seed Savers Exchange",
+        "logo": "seed-savers-logo.png",
+        "description": "Heritage seed preservation partner"
+      },
+      {
+        "name": "Food Not Lawns",
+        "logo": "fnl-logo.png",
+        "description": "Community gardening initiative"
+      }
+    ]
+  },
+  
+  "about": {
+    "pageTitle": "About HarvestHub",
+    "pageSubtitle": "Cultivating Sustainable Urban Food Systems",
+    
+    "originStory": {
+      "title": "Our Origin",
+      "content": "HarvestHub was founded in 2020 by a team of urban planners, agronomists, and community organizers who witnessed both the growing urban food insecurity and the untapped potential of small urban spaces. We started as a community initiative in Brooklyn and have grown into a global platform connecting urban growers.",
+      "founders": [
+        {
+          "name": "Dr. Lena Rodriguez",
+          "role": "Urban Agriculture Specialist",
+          "bio": "Former UN Food Systems advisor with 15 years in sustainable agriculture"
+        },
+        {
+          "name": "Marcus Johnson",
+          "role": "Community Organizer",
+          "bio": "Founded three successful urban farming cooperatives in food deserts"
+        }
+      ]
+    },
+    
+    "mission": {
+      "title": "Our Mission",
+      "content": "To democratize access to sustainable food production by empowering individuals in urban environments to grow their own food, regardless of space constraints, contributing to food security and community resilience.",
+      "corePrinciples": [
+        "Accessibility: Gardening solutions for any space",
+        "Sustainability: Eco-friendly growing methods",
+        "Community: Shared knowledge and resources",
+        "Impact: Measurable contribution to food security"
+      ]
+    },
+    
+    "vision": {
+      "title": "Our Vision",
+      "content": "A world where every urban household has the knowledge and resources to grow at least 25% of their own fresh produce, creating resilient local food systems that eliminate urban food deserts."
+    },
+    
+    "sdgAlignment": {
+      "title": "Alignment with UN SDG 2: Zero Hunger",
+      "content": "HarvestHub directly contributes to achieving Sustainable Development Goal 2 by:",
+      "contributions": [
+        {
+          "target": "Target 2.1",
+          "description": "Universal access to safe and nutritious food",
+          "howWeHelp": "Teaching urban residents to grow nutrient-dense food in small spaces"
+        },
+        {
+          "target": "Target 2.3",
+          "description": "Double agricultural productivity and incomes of small-scale food producers",
+          "howWeHelp": "Empowering urban micro-farmers to increase yields in limited spaces"
+        },
+        {
+          "target": "Target 2.4",
+          "description": "Sustainable food production systems",
+          "howWeHelp": "Promoting regenerative gardening practices in urban environments"
+        }
+      ],
+      "sdgStats": {
+        "peopleTrained": "12,500+",
+        "foodProduced": "45,000+ lbs",
+        "communitiesReached": "200+",
+        "educationalContent": "500+ tutorials"
+      }
+    },
+    
+    "team": {
+      "title": "Our Team",
+      "members": [
+        {
+          "id": "team-1",
+          "name": "Sarah Kim",
+          "role": "Head of Horticulture",
+          "expertise": "Container gardening, soil science",
+          "image": "team-sarah.jpg"
+        },
+        {
+          "id": "team-2",
+          "name": "David Park",
+          "role": "Technology Director",
+          "expertise": "Platform development, data analytics",
+          "image": "team-david.jpg"
+        },
+        {
+          "id": "team-3",
+          "name": "Aisha Mohammed",
+          "role": "Community Manager",
+          "expertise": "Urban farming, community organizing",
+          "image": "team-aisha.jpg"
+        },
+        {
+          "id": "team-4",
+          "name": "Carlos Mendez",
+          "role": "Education Specialist",
+          "expertise": "Curriculum development, adult education",
+          "image": "team-carlos.jpg"
+        }
+      ]
+    },
+    
+    "initiatives": {
+      "title": "Community Initiatives",
+      "programs": [
+        {
+          "name": "Seeds for Seniors",
+          "description": "Free container garden kits and tutorials for elderly residents in urban housing",
+          "impact": "Distributed 2,500+ kits, improved nutrition access for seniors"
+        },
+        {
+          "name": "Schoolyard Gardens",
+          "description": "Partnering with urban schools to create educational gardens",
+          "impact": "35 school gardens established, 5,000+ students engaged"
+        },
+        {
+          "name": "Food Desert Intervention",
+          "description": "Targeted programs in neighborhoods with limited fresh food access",
+          "impact": "15 community gardens in food deserts, serving 1,200+ families"
+        }
+      ]
+    }
+  },
+  
+  "howItWorks": {
+    "pageTitle": "How HarvestHub Works",
+    "pageSubtitle": "Your Journey from Beginner to Urban Gardener",
+    
+    "userJourney": {
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Choose Your Space",
+          "description": "Tell us about your available space - balcony, windowsill, small yard, or even just a wall",
+          "icon": "fas fa-search-location",
+          "details": [
+            "Upload photos or describe your space",
+            "Measure available sunlight hours",
+            "Identify microclimate conditions"
+          ],
+          "tools": ["Space Assessment Tool", "Light Meter Guide", "Climate Zone Finder"]
+        },
+        {
+          "stepNumber": 2,
+          "title": "Get Your Custom Garden Plan",
+          "description": "Receive a tailored garden design optimized for your specific conditions",
+          "icon": "fas fa-seedling",
+          "details": [
+            "Personalized plant recommendations",
+            "Layout optimized for maximum yield",
+            "Seasonal planting calendar"
+          ],
+          "tools": ["Garden Planner", "Plant Compatibility Chart", "Yield Calculator"]
+        },
+        {
+          "stepNumber": 3,
+          "title": "Follow Step-by-Step Tutorials",
+          "description": "Access video and photo guides for every stage of your garden",
+          "icon": "fas fa-play-circle",
+          "details": [
+            "Beginner-friendly instructions",
+            "Troubleshooting guides",
+            "Seasonal maintenance tasks"
+          ],
+          "tools": ["Video Library", "Visual Guides", "Expert Q&A"]
+        },
+        {
+          "stepNumber": 4,
+          "title": "Track Your Progress",
+          "description": "Monitor plant growth, log harvests, and celebrate milestones",
+          "icon": "fas fa-chart-line",
+          "details": [
+            "Growth tracking with photos",
+            "Harvest logging",
+            "Problem identification"
+          ],
+          "tools": ["Garden Journal", "Progress Dashboard", "Problem Solver"]
+        },
+        {
+          "stepNumber": 5,
+          "title": "Connect & Share",
+          "description": "Join a community of urban growers, share successes, and get support",
+          "icon": "fas fa-users",
+          "details": [
+            "Local gardening groups",
+            "Knowledge sharing platform",
+            "Surplus produce exchange"
+          ],
+          "tools": ["Community Forum", "Local Meetups", "Harvest Exchange"]
+        }
+      ]
+    },
+    
+    "keyFeatures": {
+      "title": "Platform Features",
+      "features": [
+        {
+          "name": "Smart Garden Planner",
+          "description": "AI-powered recommendations based on your space, climate, and goals",
+          "icon": "fas fa-robot"
+        },
+        {
+          "name": "Interactive Tutorials",
+          "description": "Hands-on lessons with video, images, and checklists",
+          "icon": "fas fa-graduation-cap"
+        },
+        {
+          "name": "Progress Tracking",
+          "description": "Visual timeline of your garden's development and harvests",
+          "icon": "fas fa-calendar-check"
+        },
+        {
+          "name": "Community Support",
+          "description": "Connect with mentors and fellow gardeners for advice and inspiration",
+          "icon": "fas fa-handshake"
+        }
+      ]
+    },
+    
+    "successPath": {
+      "title": "Typical User Success Path",
+      "timeline": [
+        {
+          "time": "Week 1-2",
+          "milestone": "Complete space assessment and receive garden plan"
+        },
+        {
+          "time": "Week 3-4",
+          "milestone": "Set up containers, plant first seeds/starts"
+        },
+        {
+          "time": "Month 2",
+          "milestone": "First sprouts appear, begin regular maintenance"
+        },
+        {
+          "time": "Month 3",
+          "milestone": "Harvest first crops (leafy greens, herbs)"
+        },
+        {
+          "time": "Month 4-6",
+          "milestone": "Full harvest season, preserve surplus"
+        }
+      ],
+      "averageResults": {
+        "spaceUtilized": "Average user utilizes 85% of available space",
+        "firstHarvest": "First harvest within 30-60 days",
+        "foodProduction": "Average production: 2-5 lbs/month per user",
+        "costSavings": "Estimated grocery savings: $40-100/month"
+      }
+    },
+    
+    "toolsAndResources": {
+      "title": "Helpful Tools & Guides",
+      "resources": [
+        {
+          "type": "Calculator",
+          "name": "Yield Estimator",
+          "description": "Predict how much food you can grow in your space"
+        },
+        {
+          "type": "Guide",
+          "name": "Space Optimization Handbook",
+          "description": "Maximize every inch of your growing area"
+        },
+        {
+          "type": "Tool",
+          "name": "Pest Identification App",
+          "description": "Identify and treat common urban garden pests"
+        },
+        {
+          "type": "Calculator",
+          "name": "Water Usage Calculator",
+          "description": "Optimize irrigation for water conservation"
+        }
+      ]
+    }
+  },
+  
+  "auth": {
+    "signup": {
+      "title": "Start Your Gardening Journey",
+      "subtitle": "Create your free account to access personalized garden plans and tutorials",
+      
+      "formFields": [
+        {
+          "name": "fullName",
+          "label": "Full Name",
+          "type": "text",
+          "required": true,
+          "placeholder": "Enter your full name"
+        },
+        {
+          "name": "email",
+          "label": "Email Address",
+          "type": "email",
+          "required": true,
+          "placeholder": "you@example.com"
+        },
+        {
+          "name": "password",
+          "label": "Password",
+          "type": "password",
+          "required": true,
+          "requirements": [
+            "At least 8 characters",
+            "One uppercase letter",
+            "One number"
+          ]
+        },
+        {
+          "name": "confirmPassword",
+          "label": "Confirm Password",
+          "type": "password",
+          "required": true
+        }
+      ],
+      
+      "onboardingQuestions": [
+        {
+          "question": "What type of space do you have for gardening?",
+          "fieldName": "spaceType",
+          "type": "radio",
+          "options": [
+            {"value": "balcony", "label": "Balcony or Patio"},
+            {"value": "windowsill", "label": "Windowsill or Indoor"},
+            {"value": "small_yard", "label": "Small Yard (under 100 sq ft)"},
+            {"value": "community_plot", "label": "Community Garden Plot"},
+            {"value": "rooftop", "label": "Rooftop Access"},
+            {"value": "none_yet", "label": "No Space Yet - Just Learning"}
+          ],
+          "required": true
+        },
+        {
+          "question": "How much sunlight does your space get daily?",
+          "fieldName": "sunlightHours",
+          "type": "radio",
+          "options": [
+            {"value": "full_sun", "label": "6+ hours (Full Sun)"},
+            {"value": "partial_sun", "label": "4-6 hours (Partial Sun)"},
+            {"value": "partial_shade", "label": "2-4 hours (Partial Shade)"},
+            {"value": "full_shade", "label": "Less than 2 hours (Shade)"},
+            {"value": "unknown", "label": "I'm not sure"}
+          ],
+          "required": true
+        },
+        {
+          "question": "What's your primary gardening goal?",
+          "fieldName": "gardeningGoal",
+          "type": "checkbox",
+          "options": [
+            {"value": "food_security", "label": "Grow my own food"},
+            {"value": "sustainability", "label": "Live more sustainably"},
+            {"value": "health", "label": "Access to fresh, healthy produce"},
+            {"value": "community", "label": "Connect with local gardeners"},
+            {"value": "education", "label": "Learn gardening skills"},
+            {"value": "relaxation", "label": "Gardening for stress relief"}
+          ],
+          "maxSelections": 3,
+          "required": true
+        },
+        {
+          "question": "What's your gardening experience level?",
+          "fieldName": "experienceLevel",
+          "type": "select",
+          "options": [
+            {"value": "complete_beginner", "label": "Complete Beginner"},
+            {"value": "some_experience", "label": "Some Experience"},
+            {"value": "intermediate", "label": "Intermediate Gardener"},
+            {"value": "experienced", "label": "Experienced Gardener"}
+          ],
+          "required": true
+        }
+      ],
+      
+      "benefits": [
+        "Personalized garden plans for your specific space",
+        "Access to all tutorials and growing guides",
+        "Progress tracking and garden journal",
+        "Community forum and expert Q&A",
+        "Seasonal planting reminders",
+        "Free forever for basic features"
+      ],
+      
+      "socialSignup": {
+        "enabled": true,
+        "providers": ["google", "facebook", "apple"],
+        "privacyNote": "We never post to your social media without permission"
+      },
+      
+      "termsAgreement": {
+        "required": true,
+        "termsLink": "/terms-of-service",
+        "privacyLink": "/privacy-policy",
+        "marketingConsent": false
+      }
+    },
+    
+    "login": {
+      "title": "Welcome Back to HarvestHub",
+      "subtitle": "Log in to access your garden dashboard and continue your growing journey",
+      
+      "formFields": [
+        {
+          "name": "email",
+          "label": "Email Address",
+          "type": "email",
+          "required": true,
+          "placeholder": "you@example.com"
+        },
+        {
+          "name": "password",
+          "label": "Password",
+          "type": "password",
+          "required": true
+        },
+        {
+          "name": "rememberMe",
+          "label": "Remember me",
+          "type": "checkbox",
+          "required": false
+        }
+      ],
+      
+      "recoveryOptions": [
+        {
+          "name": "forgotPassword",
+          "label": "Forgot Password?",
+          "link": "/forgot-password"
+        },
+        {
+          "name": "resendConfirmation",
+          "label": "Resend confirmation email",
+          "link": "/resend-confirmation"
+        }
+      ],
+      
+      "socialLogin": {
+        "enabled": true,
+        "providers": ["google", "facebook", "apple"],
+        "text": "Or continue with"
+      },
+      
+      "noAccount": {
+        "text": "Don't have an account yet?",
+        "linkText": "Sign up for free",
+        "link": "/signup"
+      }
+    },
+    
+    "userProfile": {
+      "onboardingComplete": false,
+      "personalizedGreeting": "Welcome to your gardening journey! Let's get your personalized garden plan set up.",
+      "nextSteps": [
+        "Complete your space assessment",
+        "Choose your first plants",
+        "Watch the getting started tutorial"
+      ]
+    }
+  },
+  
+  "apiEndpoints": {
+    "homepage": "/api/v1/homepage",
+    "about": "/api/v1/about",
+    "howItWorks": "/api/v1/how-it-works",
+    "signup": "/api/v1/auth/signup",
+    "login": "/api/v1/auth/login",
+    "validateSession": "/api/v1/auth/validate",
+    "userProfile": "/api/v1/user/profile",
+    "updateOnboarding": "/api/v1/user/onboarding"
+  },
+  
+  "responseTemplates": {
+    "success": {
+      "status": "success",
+      "message": "",
+      "data": {},
+      "timestamp": ""
+    },
+    "error": {
+      "status": "error",
+      "message": "",
+      "code": "",
+      "timestamp": ""
+    }
+  }
+}

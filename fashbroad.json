@@ -1,0 +1,823 @@
+{
+  "app": {
+    "name": "HarvestHub",
+    "description": "Urban Gardening Learning Platform",
+    "version": "2.0.0",
+    "apiVersion": "v1"
+  },
+  
+  "dashboard": {
+    "userId": "user_12345",
+    "userName": "Jordan Smith",
+    "userAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Jordan",
+    
+    "summaryStats": {
+      "activeProjects": 3,
+      "upcomingTasks": 12,
+      "coursesInProgress": 2,
+      "daysStreak": 45,
+      "totalHarvestWeight": "8.2 kg",
+      "moneySaved": "$156.40"
+    },
+    
+    "activeProjects": [
+      {
+        "projectId": "proj_001",
+        "name": "Kitchen Herb Garden",
+        "description": "Growing basil, mint, parsley, and thyme in indoor containers",
+        "status": "active",
+        "progress": 75,
+        "startDate": "2023-09-15",
+        "estimatedCompletion": "2024-03-15",
+        "location": "Kitchen windowsill",
+        "spaceType": "indoor",
+        "plantCount": 8,
+        
+        "plants": [
+          {
+            "plantId": "plant_001",
+            "name": "Sweet Basil",
+            "type": "herb",
+            "plantedDate": "2023-09-20",
+            "growthStage": "mature",
+            "healthStatus": "excellent",
+            "lastWatered": "2023-12-15",
+            "nextTask": "Prune flowering stems",
+            "nextTaskDue": "2023-12-20"
+          },
+          {
+            "plantId": "plant_002",
+            "name": "Italian Parsley",
+            "type": "herb",
+            "plantedDate": "2023-09-25",
+            "growthStage": "mature",
+            "healthStatus": "good",
+            "lastWatered": "2023-12-15",
+            "nextTask": "Harvest outer leaves",
+            "nextTaskDue": "2023-12-18"
+          }
+        ],
+        
+        "timeline": [
+          {
+            "date": "2023-09-15",
+            "event": "Project started",
+            "type": "milestone",
+            "icon": "fas fa-play-circle"
+          },
+          {
+            "date": "2023-09-20",
+            "event": "Planted basil seeds",
+            "type": "planting",
+            "icon": "fas fa-seedling"
+          },
+          {
+            "date": "2023-10-10",
+            "event": "First basil sprouts",
+            "type": "growth",
+            "icon": "fas fa-leaf"
+          },
+          {
+            "date": "2023-11-05",
+            "event": "First basil harvest",
+            "type": "harvest",
+            "icon": "fas fa-carrot",
+            "weight": "150g"
+          }
+        ],
+        
+        "upcomingTasks": [
+          {
+            "taskId": "task_001",
+            "title": "Water all herbs",
+            "dueDate": "2023-12-17",
+            "priority": "high",
+            "estimatedTime": "15 minutes",
+            "recurring": true,
+            "frequency": "every 3 days"
+          },
+          {
+            "taskId": "task_002",
+            "title": "Prune basil flowering stems",
+            "dueDate": "2023-12-20",
+            "priority": "medium",
+            "estimatedTime": "10 minutes",
+            "recurring": false
+          }
+        ],
+        
+        "photos": [
+          {
+            "photoId": "photo_001",
+            "url": "/uploads/projects/herb-garden/day1.jpg",
+            "caption": "Day 1: Setup complete",
+            "date": "2023-09-15",
+            "plantsTagged": ["plant_001", "plant_002"]
+          },
+          {
+            "photoId": "photo_002",
+            "url": "/uploads/projects/herb-garden/day20.jpg",
+            "caption": "Day 20: First sprouts!",
+            "date": "2023-10-10",
+            "plantsTagged": ["plant_001"]
+          }
+        ],
+        
+        "notes": [
+          {
+            "noteId": "note_001",
+            "date": "2023-11-10",
+            "content": "Noticed basil leaves turning slightly yellow. Moved to sunnier spot and reduced watering.",
+            "category": "observation"
+          },
+          {
+            "noteId": "note_002",
+            "date": "2023-11-25",
+            "content": "Harvested 200g of basil for pesto. Plants responded well to pruning.",
+            "category": "harvest"
+          }
+        ],
+        
+        "harvestLog": [
+          {
+            "harvestId": "harv_001",
+            "date": "2023-11-05",
+            "plant": "Sweet Basil",
+            "weight": "150g",
+            "notes": "First harvest! Used in caprese salad.",
+            "quality": "excellent"
+          },
+          {
+            "harvestId": "harv_002",
+            "date": "2023-11-25",
+            "plant": "Sweet Basil",
+            "weight": "200g",
+            "notes": "Made pesto sauce, shared with neighbors",
+            "quality": "excellent"
+          }
+        ]
+      },
+      {
+        "projectId": "proj_002",
+        "name": "Balcony Tomatoes",
+        "description": "Cherry tomato plants in containers on south-facing balcony",
+        "status": "flowering",
+        "progress": 40,
+        "startDate": "2023-10-01",
+        "estimatedCompletion": "2024-02-01",
+        "location": "Apartment balcony",
+        "spaceType": "balcony",
+        "plantCount": 3
+      }
+    ],
+    
+    "upcomingReminders": [
+      {
+        "reminderId": "rem_001",
+        "title": "Water herb garden",
+        "project": "Kitchen Herb Garden",
+        "dueDateTime": "2023-12-17T09:00:00",
+        "priority": "high",
+        "type": "watering"
+      },
+      {
+        "reminderId": "rem_002",
+        "title": "Fertilize tomato plants",
+        "project": "Balcony Tomatoes",
+        "dueDateTime": "2023-12-19T10:00:00",
+        "priority": "medium",
+        "type": "fertilizing"
+      },
+      {
+        "reminderId": "rem_003",
+        "title": "Week 3 lesson: Pruning Techniques",
+        "project": "Container Gardening Course",
+        "dueDateTime": "2023-12-18T19:00:00",
+        "priority": "low",
+        "type": "learning"
+      }
+    ],
+    
+    "recentActivity": [
+      {
+        "id": "act_001",
+        "type": "photo_upload",
+        "project": "Kitchen Herb Garden",
+        "description": "Uploaded growth progress photo",
+        "timestamp": "2023-12-14T15:30:00",
+        "icon": "fas fa-camera"
+      },
+      {
+        "id": "act_002",
+        "type": "harvest_log",
+        "project": "Kitchen Herb Garden",
+        "description": "Logged 150g basil harvest",
+        "timestamp": "2023-12-13T11:20:00",
+        "icon": "fas fa-weight"
+      },
+      {
+        "id": "act_003",
+        "type": "lesson_complete",
+        "project": "Container Gardening Course",
+        "description": "Completed lesson: Watering Strategies",
+        "timestamp": "2023-12-12T20:15:00",
+        "icon": "fas fa-graduation-cap"
+      }
+    ],
+    
+    "quickActions": [
+      {
+        "action": "add_photo",
+        "title": "Add Progress Photo",
+        "icon": "fas fa-camera",
+        "description": "Document your garden's growth"
+      },
+      {
+        "action": "log_harvest",
+        "title": "Log Harvest",
+        "icon": "fas fa-carrot",
+        "description": "Record what you've harvested"
+      },
+      {
+        "action": "add_note",
+        "title": "Add Observation",
+        "icon": "fas fa-sticky-note",
+        "description": "Jot down important notes"
+      },
+      {
+        "action": "create_project",
+        "title": "Start New Project",
+        "icon": "fas fa-plus-circle",
+        "description": "Begin a new gardening project"
+      }
+    ]
+  },
+  
+  "catalog": {
+    "searchOptions": {
+      "keywords": ["container", "balcony", "indoor", "vegetables", "herbs", "beginner", "advanced"],
+      "filters": {
+        "bySpaceType": ["indoor", "balcony", "windowsill", "small_yard", "community_plot", "rooftop"],
+        "byDifficulty": ["beginner", "intermediate", "advanced"],
+        "byCropCategory": ["vegetables", "herbs", "fruits", "flowers", "microgreens"],
+        "byGardenStyle": ["container", "vertical", "hydroponic", "raised_bed", "companion"],
+        "byDuration": ["short_1h", "medium_4h", "long_8h", "series"]
+      },
+      "sortOptions": ["popularity", "newest", "rating", "duration_asc", "duration_desc"]
+    },
+    
+    "courses": [
+      {
+        "courseId": "course_001",
+        "title": "Container Gardening Basics",
+        "description": "Learn to grow food in pots and containers even with limited space",
+        "shortDescription": "Perfect for apartments, balconies, and small yards",
+        "instructor": {
+          "name": "Maria Rodriguez",
+          "title": "Urban Agriculture Specialist",
+          "avatar": "/instructors/maria.jpg",
+          "rating": 4.9
+        },
+        "category": "container",
+        "subcategories": ["beginner", "space_saving"],
+        "difficulty": "beginner",
+        "duration": "4 hours",
+        "lessonCount": 12,
+        "enrolledCount": 2543,
+        "averageRating": 4.8,
+        "ratingCount": 342,
+        "tags": ["container", "beginner", "space-efficient", "urban"],
+        "thumbnail": "/thumbnails/container-basics.jpg",
+        "isFeatured": true,
+        "isFree": true,
+        "createdDate": "2023-06-15",
+        "lastUpdated": "2023-11-20",
+        
+        "objectives": [
+          "Select appropriate containers for different plants",
+          "Prepare optimal soil mixtures",
+          "Understand watering and fertilizing needs"
+        ],
+        
+        "whatYoullLearn": [
+          "Container selection and preparation",
+          "Soil science for container plants",
+          "Water management strategies",
+          "Seasonal care routines"
+        ],
+        
+        "prerequisites": ["No gardening experience required", "Access to some outdoor/indoor space"],
+        
+        "stats": {
+          "completionRate": "78%",
+          "avgTimeToComplete": "2 weeks",
+          "satisfactionScore": 96
+        }
+      },
+      {
+        "courseId": "course_002",
+        "title": "Vertical Gardening Mastery",
+        "description": "Maximize small spaces with innovative vertical growing systems",
+        "shortDescription": "Grow more in less space with vertical techniques",
+        "instructor": {
+          "name": "David Chen",
+          "title": "Vertical Farming Expert",
+          "avatar": "/instructors/david.jpg",
+          "rating": 4.7
+        },
+        "category": "vertical",
+        "subcategories": ["intermediate", "space_saving"],
+        "difficulty": "intermediate",
+        "duration": "6 hours",
+        "lessonCount": 15,
+        "enrolledCount": 1876,
+        "averageRating": 4.6,
+        "ratingCount": 289,
+        "tags": ["vertical", "intermediate", "wall-garden", "space-maximizing"],
+        "thumbnail": "/thumbnails/vertical-gardening.jpg",
+        "isFeatured": true,
+        "isFree": false,
+        "price": 29.99,
+        "createdDate": "2023-08-10",
+        "lastUpdated": "2023-12-01"
+      }
+    ],
+    
+    "resources": {
+      "guides": [
+        {
+          "id": "guide_001",
+          "title": "Urban Gardening Space Assessment",
+          "type": "pdf",
+          "description": "Learn to evaluate your available space for gardening",
+          "downloadCount": 1245,
+          "fileSize": "2.4 MB",
+          "downloadUrl": "/resources/space-assessment.pdf"
+        }
+      ],
+      
+      "tools": [
+        {
+          "id": "tool_001",
+          "title": "Garden Planner",
+          "type": "interactive",
+          "description": "Plan your garden layout based on space and sunlight",
+          "accessCount": 4567,
+          "url": "/tools/garden-planner"
+        }
+      ],
+      
+      "templates": [
+        {
+          "id": "template_001",
+          "title": "Garden Journal Template",
+          "type": "pdf",
+          "description": "Printable template to track your garden progress",
+          "downloadCount": 987,
+          "fileSize": "1.1 MB"
+        }
+      ]
+    }
+  },
+  
+  "courseDetails": {
+    "courseId": "course_001",
+    "title": "Container Gardening Basics",
+    "description": "A comprehensive guide to growing food in containers, perfect for urban dwellers with limited space.",
+    "detailedDescription": "This course will transform how you think about gardening in small spaces. You'll learn proven techniques for selecting containers, preparing soil, choosing plants, and maintaining healthy container gardens year-round.",
+    
+    "instructor": {
+      "name": "Maria Rodriguez",
+      "bio": "With over 15 years of experience in urban agriculture, Maria has helped thousands of city dwellers grow their own food. She holds a Master's in Sustainable Agriculture and has consulted for urban farming projects worldwide.",
+      "credentials": [
+        "MS Sustainable Agriculture, Cornell University",
+        "Certified Permaculture Designer",
+        "Urban Agriculture Consultant for UN Food Programs"
+      ],
+      "socialLinks": {
+        "website": "https://mariasgarden.com",
+        "twitter": "@mariasgarden",
+        "instagram": "marias_urban_garden"
+      }
+    },
+    
+    "enrollment": {
+      "isEnrolled": true,
+      "enrollmentDate": "2023-12-01",
+      "progress": 25,
+      "currentLesson": "lesson_003",
+      "lastAccessed": "2023-12-14T15:30:00"
+    },
+    
+    "courseGoals": [
+      "Grow at least 5 different vegetables or herbs in containers",
+      "Understand and implement proper watering techniques",
+      "Diagnose and solve common container plant problems",
+      "Design attractive and productive container arrangements"
+    ],
+    
+    "requirements": {
+      "materials": [
+        "Containers with drainage holes (various sizes)",
+        "High-quality potting mix (10-20 liters)",
+        "Plants or seeds of choice",
+        "Water-soluble fertilizer",
+        "Gardening gloves and hand trowel",
+        "Watering can with fine rose attachment"
+      ],
+      "tools": [
+        "Measuring tape",
+        "pH test kit (optional but recommended)",
+        "Pruning shears"
+      ],
+      "space": "At least 1 square meter of space with 4-6 hours of sunlight"
+    },
+    
+    "lessons": [
+      {
+        "lessonId": "lesson_001",
+        "title": "Introduction to Container Gardening",
+        "description": "Learn the fundamentals and benefits of container gardening",
+        "duration": "15 minutes",
+        "type": "video",
+        "thumbnail": "/lessons/lesson1-thumb.jpg",
+        "isCompleted": true,
+        "resources": ["handout_001"]
+      },
+      {
+        "lessonId": "lesson_002",
+        "title": "Choosing the Right Containers",
+        "description": "Select containers based on plant needs and space constraints",
+        "duration": "25 minutes",
+        "type": "video",
+        "thumbnail": "/lessons/lesson2-thumb.jpg",
+        "isCompleted": true,
+        "resources": ["handout_002", "worksheet_001"]
+      },
+      {
+        "lessonId": "lesson_003",
+        "title": "Soil and Drainage Fundamentals",
+        "description": "Create the perfect growing medium for container plants",
+        "duration": "30 minutes",
+        "type": "video",
+        "thumbnail": "/lessons/lesson3-thumb.jpg",
+        "isCompleted": false,
+        "resources": ["handout_003"]
+      }
+    ],
+    
+    "estimatedTimeline": {
+      "totalDuration": "4 hours",
+      "recommendedPace": "2-3 lessons per week",
+      "typicalCompletion": "2-3 weeks"
+    },
+    
+    "reviews": [
+      {
+        "userId": "user_56789",
+        "userName": "Alex Johnson",
+        "rating": 5,
+        "comment": "This course transformed my tiny balcony into a productive garden! Maria's explanations are clear and practical.",
+        "date": "2023-11-15",
+        "helpfulCount": 24
+      }
+    ],
+    
+    "faq": [
+      {
+        "question": "Do I need prior gardening experience?",
+        "answer": "No, this course is designed for absolute beginners. We start from the very basics."
+      },
+      {
+        "question": "How much space do I need?",
+        "answer": "You can start with just a windowsill or small balcony. The course will help you maximize whatever space you have."
+      }
+    ]
+  },
+  
+  "lesson": {
+    "lessonId": "lesson_003",
+    "courseId": "course_001",
+    "title": "Soil and Drainage Fundamentals",
+    "description": "Learn to create the perfect growing medium for healthy container plants",
+    "duration": "30 minutes",
+    "difficulty": "beginner",
+    "order": 3,
+    
+    "content": {
+      "video": {
+        "url": "https://vimeo.com/123456789",
+        "duration": "15:30",
+        "thumbnail": "/videos/lesson3-thumb.jpg",
+        "transcript": "/transcripts/lesson3.txt",
+        "captions": "/captions/lesson3.vtt"
+      },
+      
+      "sections": [
+        {
+          "sectionId": "section_001",
+          "title": "Why Soil Matters in Containers",
+          "content": "Container plants rely entirely on the soil you provide. Unlike garden soil, container soil must provide all nutrients, proper drainage, and adequate aeration.",
+          "media": [
+            {
+              "type": "image",
+              "url": "/images/soil-comparison.jpg",
+              "caption": "Comparison of good vs poor container soil"
+            }
+          ]
+        },
+        {
+          "sectionId": "section_002",
+          "title": "Components of Good Container Soil",
+          "content": "A good container mix includes:\n1. Organic matter for nutrients\n2. Inorganic materials for drainage\n3. Water-retaining components\n4. pH balancers",
+          "media": [
+            {
+              "type": "image",
+              "url": "/images/soil-components.jpg",
+              "caption": "Key components of container soil mix"
+            },
+            {
+              "type": "infographic",
+              "url": "/images/soil-infographic.png",
+              "caption": "Ideal soil composition for containers"
+            }
+          ]
+        }
+      ],
+      
+      "stepByStep": [
+        {
+          "stepNumber": 1,
+          "title": "Test Your Current Soil",
+          "instructions": "Take a handful of soil, squeeze it, then open your hand. If it stays in a tight ball, it has too much clay. If it falls apart immediately, it's too sandy.",
+          "timeEstimate": "5 minutes",
+          "materials": ["Soil sample", "Water"],
+          "tip": "The ideal soil should hold its shape when squeezed but crumble when poked."
+        },
+        {
+          "stepNumber": 2,
+          "title": "Choose Your Base Components",
+          "instructions": "Select a high-quality potting mix as your base. Look for mixes labeled specifically for containers.",
+          "timeEstimate": "10 minutes",
+          "materials": ["Potting mix", "Containers"],
+          "warning": "Avoid using garden soil in containers - it compacts and doesn't drain well."
+        }
+      ],
+      
+      "downloads": [
+        {
+          "name": "Soil Mix Recipe Card",
+          "type": "pdf",
+          "size": "850 KB",
+          "url": "/downloads/soil-recipe.pdf",
+          "description": "Printable guide with soil mix recipes for different plants"
+        },
+        {
+          "name": "Soil Assessment Worksheet",
+          "type": "pdf",
+          "size": "1.2 MB",
+          "url": "/downloads/soil-worksheet.pdf",
+          "description": "Worksheet to evaluate and improve your soil"
+        }
+      ],
+      
+      "checklist": [
+        {
+          "item": "Understand the importance of proper drainage",
+          "completed": true
+        },
+        {
+          "item": "Identify components of good container soil",
+          "completed": true
+        },
+        {
+          "item": "Prepare your own soil mix",
+          "completed": false
+        },
+        {
+          "item": "Test soil drainage",
+          "completed": false
+        }
+      ],
+      
+      "quiz": {
+        "title": "Soil Fundamentals Quiz",
+        "questions": [
+          {
+            "question": "Why is garden soil not suitable for containers?",
+            "options": [
+              "It compacts too much",
+              "It doesn't drain well",
+              "It may contain pests",
+              "All of the above"
+            ],
+            "correctAnswer": 3,
+            "explanation": "Garden soil compacts in containers, drains poorly, and may introduce pests - making it unsuitable for container gardening."
+          }
+        ],
+        "passingScore": 80
+      }
+    },
+    
+    "navigation": {
+      "previous": {
+        "lessonId": "lesson_002",
+        "title": "Choosing the Right Containers",
+        "url": "/course/001/lesson/002"
+      },
+      "next": {
+        "lessonId": "lesson_004",
+        "title": "Selecting Plants for Containers",
+        "url": "/course/001/lesson/004"
+      }
+    },
+    
+    "completion": {
+      "isCompleted": false,
+      "progress": 60,
+      "timeSpent": "18 minutes",
+      "lastAccessed": "2023-12-14T15:30:00"
+    }
+  },
+  
+  "profile": {
+    "userId": "user_12345",
+    "email": "jordan.smith@example.com",
+    
+    "personalInfo": {
+      "fullName": "Jordan Smith",
+      "displayName": "GardenJordan",
+      "avatar": "/avatars/jordan.jpg",
+      "bio": "Urban gardening enthusiast transforming my small apartment into a food forest, one container at a time.",
+      "location": "Portland, OR",
+      "joinDate": "2023-03-15",
+      "lastActive": "2023-12-14T15:30:00"
+    },
+    
+    "gardeningPreferences": {
+      "primarySpace": "balcony",
+      "secondarySpace": "indoor",
+      "experienceLevel": "intermediate",
+      "gardeningGoals": ["food_production", "sustainability", "stress_relief"],
+      "preferredCrops": ["herbs", "leafy_greens", "tomatoes"],
+      "gardeningStyle": "container",
+      "availableTime": "5-10 hours per week",
+      "climateZone": "8b",
+      "notifications": {
+        "wateringReminders": true,
+        "taskReminders": true,
+        "newCourseAlerts": true,
+        "communityUpdates": false,
+        "newsletter": true
+      }
+    },
+    
+    "stats": {
+      "totalProjects": 5,
+      "activeProjects": 3,
+      "completedProjects": 2,
+      "totalHarvest": "12.5 kg",
+      "coursesCompleted": 4,
+      "currentStreak": 45,
+      "longestStreak": 67,
+      "totalLearningHours": 42
+    },
+    
+    "security": {
+      "twoFactorEnabled": false,
+      "loginHistory": [
+        {
+          "date": "2023-12-14",
+          "time": "15:30",
+          "device": "Chrome on Windows",
+          "location": "Portland, OR",
+          "ip": "192.168.1.100"
+        },
+        {
+          "date": "2023-12-13",
+          "time": "20:15",
+          "device": "Safari on iPhone",
+          "location": "Portland, OR",
+          "ip": "192.168.1.101"
+        }
+      ],
+      "connectedDevices": [
+        {
+          "deviceName": "Primary Laptop",
+          "lastActive": "2023-12-14T15:30:00",
+          "browser": "Chrome"
+        }
+      ]
+    },
+    
+    "recentActivity": [
+      {
+        "type": "course_progress",
+        "title": "Advanced Container Techniques",
+        "description": "Completed module 3",
+        "timestamp": "2023-12-13T20:15:00"
+      },
+      {
+        "type": "harvest_log",
+        "title": "Kitchen Herb Garden",
+        "description": "Harvested 150g basil",
+        "timestamp": "2023-12-12T11:20:00"
+      },
+      {
+        "type": "project_update",
+        "title": "Balcony Tomatoes",
+        "description": "Added progress photos",
+        "timestamp": "2023-12-11T16:45:00"
+      }
+    ],
+    
+    "achievements": [
+      {
+        "id": "ach_001",
+        "name": "First Harvest",
+        "description": "Successfully harvested your first crop",
+        "icon": "fas fa-carrot",
+        "earnedDate": "2023-05-20",
+        "category": "gardening"
+      },
+      {
+        "id": "ach_002",
+        "name": "30-Day Streak",
+        "description": "Logged garden activity for 30 consecutive days",
+        "icon": "fas fa-fire",
+        "earnedDate": "2023-10-15",
+        "category": "consistency"
+      }
+    ],
+    
+    "subscription": {
+      "plan": "free",
+      "status": "active",
+      "features": [
+        "Basic course access",
+        "Up to 3 projects",
+        "Community forum access",
+        "Basic analytics"
+      ],
+      "upgradeOptions": [
+        {
+          "plan": "premium",
+          "price": 9.99,
+          "period": "monthly",
+          "features": [
+            "All courses unlocked",
+            "Unlimited projects",
+            "Advanced analytics",
+            "Priority support",
+            "Offline access"
+          ]
+        }
+      ]
+    }
+  },
+  
+  "apiEndpoints": {
+    "dashboard": {
+      "getDashboard": "/api/v1/dashboard",
+      "getProject": "/api/v1/projects/:projectId",
+      "createProject": "/api/v1/projects",
+      "updateProject": "/api/v1/projects/:projectId",
+      "addProjectPhoto": "/api/v1/projects/:projectId/photos",
+      "addProjectNote": "/api/v1/projects/:projectId/notes",
+      "logHarvest": "/api/v1/projects/:projectId/harvest",
+      "getReminders": "/api/v1/reminders",
+      "updateReminder": "/api/v1/reminders/:reminderId"
+    },
+    
+    "catalog": {
+      "getCourses": "/api/v1/courses",
+      "searchCourses": "/api/v1/courses/search",
+      "filterCourses": "/api/v1/courses/filter",
+      "getResources": "/api/v1/resources",
+      "getCategories": "/api/v1/categories"
+    },
+    
+    "course": {
+      "getCourse": "/api/v1/courses/:courseId",
+      "enrollCourse": "/api/v1/courses/:courseId/enroll",
+      "getProgress": "/api/v1/courses/:courseId/progress",
+      "updateProgress": "/api/v1/courses/:courseId/progress"
+    },
+    
+    "lesson": {
+      "getLesson": "/api/v1/lessons/:lessonId",
+      "completeLesson": "/api/v1/lessons/:lessonId/complete",
+      "saveProgress": "/api/v1/lessons/:lessonId/progress",
+      "getQuiz": "/api/v1/lessons/:lessonId/quiz"
+    },
+    
+    "profile": {
+      "getProfile": "/api/v1/profile",
+      "updateProfile": "/api/v1/profile",
+      "updatePreferences": "/api/v1/profile/preferences",
+      "changePassword": "/api/v1/profile/password",
+      "getActivity": "/api/v1/profile/activity",
+      "deleteAccount": "/api/v1/profile/delete"
+    }
+  }
+}
