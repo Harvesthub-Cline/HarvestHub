@@ -1,0 +1,2624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HarvestHub - Grow Your Own Food</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Combined CSS Variables */
+        :root {
+            /* HarvestHub colors */
+            --primary-color: #4CAF50;
+            --primary-dark: #388E3C;
+            --primary-light: #C8E6C9;
+            --secondary-color: #FF9800;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --background-light: #F9F9F9;
+            --white: #FFFFFF;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            
+            /* GreenThumb colors */
+            --primary-green: #2d5a27;
+            --secondary-green: #4a7c59;
+            --light-green: #8fcb9b;
+            --background-beige: #f8f5f0;
+            --card-white: #ffffff;
+            --accent-gold: #d4a017;
+            
+            /* Course Wizard */
+            --step-inactive: #ddd;
+            --step-active: #4CAF50;
+            --step-completed: #8bc34a;
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--text-dark);
+            background-color: var(--background-light);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: #F57C00;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            color: var(--text-dark);
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .logo i {
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1598880940086-5cd5e2b8f782?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            padding: 120px 0;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        /* Login/Signup Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .close-modal:hover {
+            color: var(--text-dark);
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .auth-form h2 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .auth-form p {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--text-light);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .toggle-auth {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-light);
+        }
+
+        .toggle-auth a {
+            color: var(--primary-color);
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Course Wizard Modal */
+        .course-wizard {
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .wizard-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .wizard-steps:before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: var(--step-inactive);
+            z-index: 1;
+        }
+
+        .wizard-step {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            flex: 1;
+        }
+
+        .step-circle {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: var(--step-inactive);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: bold;
+            transition: var(--transition);
+        }
+
+        .step-circle.active {
+            background-color: var(--step-active);
+            transform: scale(1.1);
+        }
+
+        .step-circle.completed {
+            background-color: var(--step-completed);
+        }
+
+        .step-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .step-label.active {
+            color: var(--step-active);
+            font-weight: 600;
+        }
+
+        .wizard-content {
+            padding: 20px 0;
+            min-height: 300px;
+        }
+
+        .wizard-page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .wizard-page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .course-option {
+            background-color: var(--background-light);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .course-option:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .course-option.selected {
+            border-color: var(--primary-color);
+            background-color: var(--primary-light);
+        }
+
+        .course-option h4 {
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+
+        .wizard-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .wizard-buttons .btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .wizard-buttons .btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .wizard-buttons .btn:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Course Completion Page */
+        .completion-page {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .completion-icon {
+            font-size: 4rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .completion-message {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--text-dark);
+        }
+
+        /* Progress tracking */
+        .course-progress {
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* Next Step Button */
+        .next-step-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: var(--secondary-color);
+            margin-top: 15px;
+        }
+
+        .next-step-btn:hover {
+            background-color: #F57C00;
+        }
+
+        .next-step-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .next-step-btn:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Follow-up Notifications */
+        .follow-up-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: none;
+            max-width: 350px;
+            animation: slideInUp 0.5s ease;
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .follow-up-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .follow-up-header h4 {
+            font-size: 1.1rem;
+        }
+
+        .close-follow-up {
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .close-follow-up:hover {
+            color: white;
+        }
+
+        /* Dashboard Section (HarvestHub version) */
+        .dashboard {
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-top: -50px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .dashboard-container {
+            display: flex;
+            gap: 30px;
+        }
+
+        .dashboard-nav {
+            flex: 1;
+            background-color: var(--background-light);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .dashboard-nav ul {
+            margin-bottom: 30px;
+        }
+
+        .dashboard-nav li {
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .dashboard-nav li:hover, .dashboard-nav li.active {
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+        }
+
+        .dashboard-nav li i {
+            margin-right: 10px;
+        }
+
+        .dashboard-content {
+            flex: 3;
+        }
+
+        .feed-controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .feed-controls button {
+            background: none;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .feed-controls button.active {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        /* Courses Section */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .course-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .course-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .course-content {
+            padding: 20px;
+        }
+
+        .course-content h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .course-content p {
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        /* Community Section */
+        .community-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        .qa-post, .group-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+        }
+
+        .qa-post h3, .group-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            color: var(--primary-dark);
+            font-weight: bold;
+        }
+
+        .group-card {
+            background-color: var(--primary-light);
+            text-align: center;
+        }
+
+        .group-card .btn {
+            margin-top: 15px;
+        }
+
+        /* GREEN THUMB DASHBOARD STYLES */
+        
+        /* Dashboard Header */
+        .dashboard-header {
+            margin: 30px 0;
+        }
+        
+        .dashboard-header h2 {
+            font-size: 32px;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+        }
+        
+        .dashboard-header p {
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 600px;
+        }
+        
+        /* Navigation Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .nav-card {
+            background-color: var(--card-white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            height: 100%;
+        }
+        
+        .nav-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-icon {
+            height: 80px;
+            background-color: var(--primary-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 36px;
+        }
+        
+        .card-content {
+            padding: 25px;
+        }
+        
+        .card-content h3 {
+            font-size: 22px;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .card-content h3 i {
+            color: var(--accent-gold);
+        }
+        
+        .card-content p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+        
+        .features-list {
+            list-style-type: none;
+            margin-top: 15px;
+        }
+        
+        .features-list li {
+            padding: 5px 0;
+            color: var(--text-light);
+        }
+        
+        .features-list li i {
+            color: var(--secondary-green);
+            margin-right: 8px;
+        }
+        
+        /* Active Projects Section */
+        .active-projects {
+            margin-top: 50px;
+            padding: 25px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .active-projects h3 {
+            font-size: 24px;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .project-card {
+            background-color: var(--background-beige);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid var(--secondary-green);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-card h4 {
+            color: var(--primary-green);
+            margin-bottom: 10px;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: var(--secondary-green);
+            border-radius: 4px;
+        }
+        
+        /* Toggle between pages */
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        /* User Profile */
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-green);
+            font-weight: bold;
+        }
+        
+        /* Profile Page */
+        .profile-container {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .profile-sidebar {
+            flex: 1;
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+        }
+        
+        .profile-main {
+            flex: 3;
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            font-weight: bold;
+        }
+        
+        .profile-info h2 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .profile-info p {
+            color: var(--text-light);
+        }
+        
+        .profile-stats {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--primary-light);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .dashboard-container {
+                flex-direction: column;
+            }
+
+            .community-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-header h2 {
+                font-size: 28px;
+            }
+            
+            .profile-container {
+                flex-direction: column;
+            }
+            
+            .wizard-steps {
+                flex-wrap: wrap;
+            }
+            
+            .wizard-step {
+                flex: none;
+                width: 50%;
+                margin-bottom: 20px;
+            }
+            
+            .follow-up-notification {
+                left: 20px;
+                right: 20px;
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login/Signup Modal -->
+    <div id="auth-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" id="close-auth-modal">&times;</span>
+            
+            <div id="login-form" class="auth-form active">
+                <h2>Welcome Back!</h2>
+                <p>Sign in to your HarvestHub account</p>
+                
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="login-email">Email Address</label>
+                        <input type="email" id="login-email" placeholder="you@example.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" placeholder="Enter your password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn" style="width: 100%;" id="login-next-step">NEXT STEP <i class="fas fa-arrow-right"></i></button>
+                </form>
+                
+                <div class="toggle-auth">
+                    Don't have an account? <a id="show-signup">Sign up</a>
+                </div>
+            </div>
+            
+            <div id="signup-form" class="auth-form">
+                <h2>Join HarvestHub</h2>
+                <p>Create your free account to get started</p>
+                
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label for="signup-name">Full Name</label>
+                        <input type="text" id="signup-name" placeholder="Your name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signup-email">Email Address</label>
+                        <input type="email" id="signup-email" placeholder="you@example.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signup-password">Create Password</label>
+                        <input type="password" id="signup-password" placeholder="At least 8 characters" required>
+                    </div>
+                    
+                    <button type="submit" class="btn" style="width: 100%;" id="signup-next-step">NEXT STEP <i class="fas fa-arrow-right"></i></button>
+                </form>
+                
+                <div class="toggle-auth">
+                    Already have an account? <a id="show-login">Sign in</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Course Wizard Modal -->
+    <div id="course-wizard-modal" class="modal-overlay">
+        <div class="modal-content course-wizard">
+            <span class="close-modal" id="close-course-wizard">&times;</span>
+            
+            <div class="wizard-steps">
+                <div class="wizard-step" id="step-1">
+                    <div class="step-circle" id="circle-1">1</div>
+                    <div class="step-label" id="label-1">Select Course</div>
+                </div>
+                <div class="wizard-step" id="step-2">
+                    <div class="step-circle" id="circle-2">2</div>
+                    <div class="step-label" id="label-2">Choose Plan</div>
+                </div>
+                <div class="wizard-step" id="step-3">
+                    <div class="step-circle" id="circle-3">3</div>
+                    <div class="step-label" id="label-3">Get Materials</div>
+                </div>
+                <div class="wizard-step" id="step-4">
+                    <div class="step-circle" id="circle-4">4</div>
+                    <div class="step-label" id="label-4">Confirm</div>
+                </div>
+            </div>
+            
+            <div class="wizard-content">
+                <!-- Step 1: Select Course -->
+                <div class="wizard-page active" id="wizard-page-1">
+                    <h3>Step 1: Choose Your Gardening Course</h3>
+                    <p>Select the course that matches your space and gardening goals.</p>
+                    
+                    <div class="course-option" data-course="vertical">
+                        <h4>Vertical Gardening 101</h4>
+                        <p><strong>Perfect for:</strong> Small balconies, limited spaces</p>
+                        <p><strong>Duration:</strong> 4 weeks | <strong>Difficulty:</strong> Beginner</p>
+                        <p>Learn to grow upwards with wall planters, trellises, and hanging gardens.</p>
+                    </div>
+                    
+                    <div class="course-option" data-course="herb">
+                        <h4>Balcony Herb Essentials</h4>
+                        <p><strong>Perfect for:</strong> Balcony gardeners, culinary enthusiasts</p>
+                        <p><strong>Duration:</strong> 3 weeks | <strong>Difficulty:</strong> Beginner</p>
+                        <p>Grow fresh basil, mint, rosemary, and other herbs right on your balcony.</p>
+                    </div>
+                    
+                    <div class="course-option" data-course="microgreens">
+                        <h4>DIY Microgreens for Beginners</h4>
+                        <p><strong>Perfect for:</strong> Indoor spaces, apartment dwellers</p>
+                        <p><strong>Duration:</strong> 2 weeks | <strong>Difficulty:</strong> Beginner</p>
+                        <p>Grow nutrient-packed microgreens indoors with minimal equipment.</p>
+                    </div>
+                    
+                    <div class="course-option" data-course="container">
+                        <h4>Container Vegetable Gardening</h4>
+                        <p><strong>Perfect for:</strong> Patios, decks, small yards</p>
+                        <p><strong>Duration:</strong> 6 weeks | <strong>Difficulty:</strong> Intermediate</p>
+                        <p>Grow tomatoes, peppers, and other vegetables in containers.</p>
+                    </div>
+                    
+                    <div class="wizard-buttons">
+                        <button class="btn" id="next-step-1" disabled>NEXT STEP <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+                
+                <!-- Step 2: Choose Plan -->
+                <div class="wizard-page" id="wizard-page-2">
+                    <h3>Step 2: Select Your Learning Plan</h3>
+                    <p>Choose how you want to learn. All plans include community access.</p>
+                    
+                    <div class="course-option" data-plan="free">
+                        <h4>Free Plan</h4>
+                        <p><strong>Access to:</strong> Basic video lessons, community forum</p>
+                        <p><strong>Perfect for:</strong> Self-paced learners on a budget</p>
+                        <p><strong>Cost:</strong> FREE</p>
+                    </div>
+                    
+                    <div class="course-option" data-plan="premium">
+                        <h4>Premium Plan</h4>
+                        <p><strong>Access to:</strong> All video lessons, downloadable guides, Q&A with experts</p>
+                        <p><strong>Perfect for:</strong> Serious gardeners wanting expert guidance</p>
+                        <p><strong>Cost:</strong> $29.99 (one-time payment)</p>
+                    </div>
+                    
+                    <div class="course-option" data-plan="pro">
+                        <h4>Pro Plan</h4>
+                        <p><strong>Access to:</strong> Everything in Premium plus personalized coaching, plant diagnosis, advanced techniques</p>
+                        <p><strong>Perfect for:</strong> Gardening enthusiasts wanting to master skills</p>
+                        <p><strong>Cost:</strong> $49.99 (one-time payment)</p>
+                    </div>
+                    
+                    <div class="wizard-buttons">
+                        <button class="btn" id="prev-step-2"><i class="fas fa-arrow-left"></i> BACK</button>
+                        <button class="btn" id="next-step-2" disabled>NEXT STEP <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+                
+                <!-- Step 3: Get Materials -->
+                <div class="wizard-page" id="wizard-page-3">
+                    <h3>Step 3: Prepare Your Materials</h3>
+                    <p>Based on your course selection, here's what you'll need to get started:</p>
+                    
+                    <div id="materials-content">
+                        <p>Select a course in Step 1 to see required materials.</p>
+                    </div>
+                    
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label for="materials-ready">Do you have these materials ready?</label>
+                        <select id="materials-ready" style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ddd;">
+                            <option value="">Select an option</option>
+                            <option value="yes">Yes, I have everything ready</option>
+                            <option value="some">I have some materials, need to get others</option>
+                            <option value="no">I need to purchase materials</option>
+                        </select>
+                    </div>
+                    
+                    <div class="wizard-buttons">
+                        <button class="btn" id="prev-step-3"><i class="fas fa-arrow-left"></i> BACK</button>
+                        <button class="btn" id="next-step-3" disabled>NEXT STEP <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+                
+                <!-- Step 4: Confirmation -->
+                <div class="wizard-page" id="wizard-page-4">
+                    <div class="completion-page">
+                        <div class="completion-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h3>You're All Set!</h3>
+                        <div class="completion-message" id="confirmation-message">
+                            <!-- Dynamic content will be inserted here -->
+                        </div>
+                        
+                        <div id="course-summary" style="text-align: left; background-color: var(--background-light); padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+                            <h4>Course Summary:</h4>
+                            <p><strong>Selected Course:</strong> <span id="summary-course">None selected</span></p>
+                            <p><strong>Learning Plan:</strong> <span id="summary-plan">None selected</span></p>
+                            <p><strong>Materials Status:</strong> <span id="summary-materials">Not specified</span></p>
+                            <p><strong>Start Date:</strong> <span id="summary-date">Today</span></p>
+                        </div>
+                        
+                        <button class="btn" id="start-course-now" style="margin-bottom: 15px;">START COURSE NOW <i class="fas fa-play-circle"></i></button>
+                        <p style="color: var(--text-light); font-size: 0.9rem;">You can access your course anytime from your dashboard.</p>
+                    </div>
+                    
+                    <div class="wizard-buttons">
+                        <button class="btn" id="prev-step-4"><i class="fas fa-arrow-left"></i> BACK</button>
+                        <button class="btn" id="finish-wizard">FINISH <i class="fas fa-check"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Follow-up Notification -->
+    <div class="follow-up-notification" id="follow-up-notification">
+        <div class="follow-up-header">
+            <h4><i class="fas fa-bell"></i> Follow-up Reminder</h4>
+            <span class="close-follow-up" id="close-follow-up">&times;</span>
+        </div>
+        <div id="follow-up-message">
+            <!-- Dynamic follow-up message will go here -->
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="logo" id="logo">
+                    <i class="fas fa-seedling"></i>
+                    <span>HarvestHub</span>
+                </div>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="#" class="nav-link" data-page="home">Home</a></li>
+                        <li><a href="#" class="nav-link" data-page="dashboard">My Dashboard</a></li>
+                        <li><a href="#" class="nav-link" data-page="courses">Courses</a></li>
+                        <li><a href="#" class="nav-link" data-page="community">Community</a></li>
+                        <li><a href="#" class="nav-link" data-page="profile">Profile</a></li>
+                        <li><a href="#" id="sign-in-btn">Sign In</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <div id="home-page" class="page active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>GROW YOUR OWN FOOD,<br>NO YARD NEEDED</h1>
+                    <p>Learn to grow herbs & veggies in any small space with easy video guides</p>
+                    <a href="#" class="btn" id="start-course-wizard-btn">START A COURSE</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Preview Section -->
+        <section class="container">
+            <div class="dashboard">
+                <div class="dashboard-container">
+                    <div class="dashboard-nav">
+                        <h3>Dashboard Navigation</h3>
+                        <ul>
+                            <li class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</li>
+                            <li><i class="fas fa-user"></i> Profile</li>
+                            <li><i class="fas fa-users"></i> Community</li>
+                        </ul>
+                        <h3>Feed Controls</h3>
+                        <div class="feed-controls">
+                            <button class="active">Latest</button>
+                            <button>Trending</button>
+                            <button>My Gardens</button>
+                            <button>Course</button>
+                        </div>
+                    </div>
+                    <div class="dashboard-content">
+                        <h2>Welcome to Your Gardening Dashboard</h2>
+                        <p>Track your progress, connect with other gardeners, and continue your learning journey.</p>
+                        <p style="margin-top: 20px;"><strong>Full dashboard available after signing in!</strong></p>
+                        <a href="#" class="btn" id="goto-dashboard-btn" style="margin-top: 20px;">Go to Full Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">How HarvestHub Helps You Grow</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                        <h3>Step by Step Video Lessons</h3>
+                        <p>Follow along with our easy-to-follow video guides for every gardening skill level.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3>Tools & Plants Choices</h3>
+                        <p>Get recommendations for the best tools and plants for your specific space and needs.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3>Comment & Share</h3>
+                        <p>Connect with other gardeners, share your progress, and get advice from the community.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>See What's Possible</h3>
+                        <p>Get inspired by success stories and see what others have accomplished with small spaces.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Courses Section -->
+        <section class="section" style="background-color: var(--white);">
+            <div class="container">
+                <h2 class="section-title">JumpStart Your Gardening Journey</h2>
+                <div class="courses-grid">
+                    <!-- Vertical Gardening 101 Card -->
+                    <div class="course-card">
+                        <div class="course-img" style="background-image: url('https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');"></div>
+                        <div class="course-content">
+                            <h3>Vertical Gardening 101</h3>
+                            <p><strong>Space Type:</strong> Small Spaces, Balcony<br>
+                            <strong>Difficulty:</strong> Beginner<br>
+                            <strong>Duration:</strong> 4 weeks</p>
+                            <div class="course-progress">
+                                <span>Your Progress: <span class="progress-text">0%</span></span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="progress-vertical"></div>
+                                </div>
+                            </div>
+                            <a href="#" class="btn view-course-btn">View Course Details</a>
+                            <a href="#" class="btn next-step-btn start-course-wizard" data-course="vertical">START THIS COURSE <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- Balcony Herb Essentials Card -->
+                    <div class="course-card">
+                        <div class="course-img" style="background-image: url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');"></div>
+                        <div class="course-content">
+                            <h3>Balcony Herb Essentials</h3>
+                            <p><strong>Space Type:</strong> Balcony<br>
+                            <strong>Difficulty:</strong> Beginner<br>
+                            <strong>Duration:</strong> 3 weeks</p>
+                            <div class="course-progress">
+                                <span>Your Progress: <span class="progress-text">0%</span></span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="progress-herb"></div>
+                                </div>
+                            </div>
+                            <a href="#" class="btn view-course-btn">View Course Details</a>
+                            <a href="#" class="btn next-step-btn start-course-wizard" data-course="herb">START THIS COURSE <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- DIY Microgreens for Beginners Card -->
+                    <div class="course-card">
+                        <div class="course-img" style="background-image: url('https://images.unsplash.com/photo-1598880940086-5cd5e2b8f782?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');"></div>
+                        <div class="course-content">
+                            <h3>DIY Microgreens for Beginners</h3>
+                            <p><strong>Space Type:</strong> Indoor<br>
+                            <strong>Difficulty:</strong> Beginner<br>
+                            <strong>Duration:</strong> 2 weeks</p>
+                            <div class="course-progress">
+                                <span>Your Progress: <span class="progress-text">0%</span></span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="progress-microgreens"></div>
+                                </div>
+                            </div>
+                            <a href="#" class="btn view-course-btn">View Course Details</a>
+                            <a href="#" class="btn next-step-btn start-course-wizard" data-course="microgreens">START THIS COURSE <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 40px;">
+                    <a href="#" class="btn btn-secondary" id="view-all-courses">View all Courses</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Section -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Got a Question? Ask the Community</h2>
+                <div class="community-container">
+                    <div class="qa-post">
+                        <h3>Latest Q&A Post Snippet</h3>
+                        <div class="user-info">
+                            <div class="user-avatar">JG</div>
+                            <div>
+                                <strong>User: My Tomatoes Have yellow leaves, Help!</strong>
+                                <p>Posted 2 hours ago</p>
+                            </div>
+                        </div>
+                        <p>I've been growing tomatoes on my balcony for 2 months now, but recently the leaves have started turning yellow. I water them regularly and they get about 6 hours of sunlight. Any advice would be appreciated!</p>
+                        <div style="margin-top: 20px;">
+                            <a href="#" class="btn" id="view-discussion-btn">View Full Discussion</a>
+                        </div>
+                    </div>
+                    <div class="group-card">
+                        <h3>Local Group Shoutout</h3>
+                        <p>Join "Urban Gardeners 'NYC' Group!"</p>
+                        <p>Connect with fellow gardeners in your area, share tips, and participate in local seed swaps.</p>
+                        <a href="#" class="btn join-group-next-step">Join Group <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- GreenThumb Dashboard Page -->
+    <div id="dashboard-page" class="page">
+        <!-- Main Dashboard Content -->
+        <main class="container">
+            <!-- Dashboard Header -->
+            <section class="dashboard-header">
+                <h2>My Gardening Dashboard</h2>
+                <p>Manage your ongoing gardening projects, explore courses, track progress, and customize your learning experience.</p>
+            </section>
+            
+            <!-- Navigation Cards -->
+            <section class="cards-grid">
+                <!-- My Dashboard Card -->
+                <div class="nav-card" id="dashboard-card">
+                    <div class="card-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>My Dashboard <i class="fas fa-chart-line"></i></h3>
+                        <p>Manage ongoing gardening setups and track progress.</p>
+                        <ul class="features-list">
+                            <li><i class="fas fa-check-circle"></i> View all active garden projects</li>
+                            <li><i class="fas fa-check-circle"></i> Track timelines and set reminders</li>
+                            <li><i class="fas fa-check-circle"></i> Access photos and growth notes</li>
+                            <li><i class="fas fa-check-circle"></i> Monitor plant development progress</li>
+                        </ul>
+                        <a href="#" class="btn next-step-btn" style="margin-top: 15px;">EXPLORE DASHBOARD <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Garden Course Catalog Card -->
+                <div class="nav-card" id="catalog-card">
+                    <div class="card-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Garden Course Catalog <i class="fas fa-search"></i></h3>
+                        <p>Browse and select gardening learning paths and tutorials.</p>
+                        <ul class="features-list">
+                            <li><i class="fas fa-filter"></i> Searchable, filterable tutorial list</li>
+                            <li><i class="fas fa-home"></i> Filter by space type (balcony, backyard, indoor)</li>
+                            <li><i class="fas fa-signal"></i> Sort by difficulty level</li>
+                            <li><i class="fas fa-leaf"></i> Browse by crop category or garden style</li>
+                        </ul>
+                        <a href="#" class="btn next-step-btn" style="margin-top: 15px;">BROWSE COURSES <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Course Detail Page Card -->
+                <div class="nav-card" id="course-card">
+                    <div class="card-icon">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Course Details <i class="fas fa-info-circle"></i></h3>
+                        <p>View full details of a gardening course or tutorial.</p>
+                        <ul class="features-list">
+                            <li><i class="fas fa-bullseye"></i> Course goals and learning outcomes</li>
+                            <li><i class="fas fa-tools"></i> Required materials and tools list</li>
+                            <li><i class="fas fa-list-ol"></i> Complete lesson breakdown</li>
+                            <li><i class="fas fa-clock"></i> Estimated completion time</li>
+                        </ul>
+                        <a href="#" class="btn next-step-btn" style="margin-top: 15px;">VIEW COURSE DETAILS <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Lesson Page Card -->
+                <div class="nav-card" id="lesson-card">
+                    <div class="card-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Interactive Lessons <i class="fas fa-video"></i></h3>
+                        <p>Step-by-step learning through videos, photos, and instructions.</p>
+                        <ul class="features-list">
+                            <li><i class="fas fa-film"></i> Instructional videos for each task</li>
+                            <li><i class="fas fa-images"></i> Visual guides and photo references</li>
+                            <li><i class="fas fa-list-check"></i> Practical step-by-step instructions</li>
+                            <li><i class="fas fa-question-circle"></i> Q&A and troubleshooting tips</li>
+                        </ul>
+                        <a href="#" class="btn next-step-btn" style="margin-top: 15px;">START LESSON <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Profile & Settings Card -->
+                <div class="nav-card" id="profile-card">
+                    <div class="card-icon">
+                        <i class="fas fa-user-cog"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Profile & Settings <i class="fas fa-sliders-h"></i></h3>
+                        <p>Manage personal information and gardening preferences.</p>
+                        <ul class="features-list">
+                            <li><i class="fas fa-user-edit"></i> Edit profile and account information</li>
+                            <li><i class="fas fa-history"></i> View recent activities and progress</li>
+                            <li><i class="fas fa-cogs"></i> Update gardening preferences</li>
+                            <li><i class="fas fa-shield-alt"></i> Manage security and privacy settings</li>
+                        </ul>
+                        <a href="#" class="btn next-step-btn" style="margin-top: 15px;">EDIT PROFILE <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Active Projects Section -->
+            <section class="active-projects">
+                <h3><i class="fas fa-spa"></i> Active Garden Projects</h3>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h4>Balcony Herb Garden</h4>
+                        <p>Started: March 15, 2023</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 75%;"></div>
+                        </div>
+                        <p>75% complete - Harvesting in progress</p>
+                        <a href="#" class="btn next-step-btn" style="margin-top: 10px; padding: 8px 15px; font-size: 0.9rem;">VIEW PROJECT <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="project-card">
+                        <h4>Indoor Succulent Collection</h4>
+                        <p>Started: January 10, 2023</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 90%;"></div>
+                        </div>
+                        <p>90% complete - Maintenance phase</p>
+                        <a href="#" class="btn next-step-btn" style="margin-top: 10px; padding: 8px 15px; font-size: 0.9rem;">VIEW PROJECT <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="project-card">
+                        <h4>Backyard Vegetable Patch</h4>
+                        <p>Started: April 5, 2023</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 40%;"></div>
+                        </div>
+                        <p>40% complete - Seedlings growing</p>
+                        <a href="#" class="btn next-step-btn" style="margin-top: 10px; padding: 8px 15px; font-size: 0.9rem;">VIEW PROJECT <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="project-card">
+                        <h4>Vertical Green Wall</h4>
+                        <p>Started: May 20, 2023</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 20%;"></div>
+                        </div>
+                        <p>20% complete - Planning and setup</p>
+                        <a href="#" class="btn next-step-btn" style="margin-top: 10px; padding: 8px 15px; font-size: 0.9rem;">VIEW PROJECT <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Courses Page -->
+    <div id="courses-page" class="page">
+        <section class="section" style="background-color: var(--white);">
+            <div class="container">
+                <h2 class="section-title">Garden Course Catalog</h2>
+                <p style="text-align: center; margin-bottom: 40px; font-size: 1.2rem;">Browse and select gardening learning paths and tutorials based on your space, skill level, and interests.</p>
+                
+                <div class="courses-grid">
+                    <!-- Vertical Gardening 101 Card -->
+                    <div class="course-card">
+                        <div class="course-img" style="background-image: url('https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');"></div>
+                        <div class="course-content">
+                            <h3>Vertical Gardening 101</h3>
+                            <p><strong>Space Type:</strong> Small Spaces, Balcony<br>
+                            <strong>Difficulty:</strong> Beginner<br>
+                            <strong>Duration:</strong> 4 weeks</p>
+                            <div class="course-progress">
+                                <span>Your Progress: <span class="progress-text">0%</span></span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="progress-vertical-courses"></div>
+                                </div>
+                            </div>
+                            <a href="#" class="btn view-course-btn">View Course Details</a>
+                            <a href="#" class="btn next-step-btn start-course-wizard" data-course="vertical">START THIS COURSE <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- Balcony Herb Essentials Card -->
+                    <div class="course-card">
+                        <div class="course-img" style="background-image: url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');"></div>
+                        <div class="course-content">
+                            <h3>Balcony Herb Essentials</h3>
+                            <p><strong>Space Type:</strong> Balcony<br>
+                            <strong>Difficulty:</strong> Beginner<br>
+                            <strong>Duration:</strong> 3 weeks</p>
+                            <div class="course-progress">
+                                <span>Your Progress: <span class="progress-text">0%</span></span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="progress-herb-courses"></div>
+                                </div>
+                            </div>
+                            <a href="#" class="btn view-course-btn">View Course Details</a>
+                            <a href="#" class="btn next-step-btn start-course-wizard" data-course="herb">START THIS COURSE <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- DIY Microgreens for Beginners Card -->
+                    <div class="course-card">
+                        <div class="course-img" style="background-image: url('https://images.unsplash.com/photo-1598880940086-5cd5e2b8f782?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');"></div>
+                        <div class="course-content">
+                            <h3>DIY Microgreens for Beginners</h3>
+                            <p><strong>Space Type:</strong> Indoor<br>
+                            <strong>Difficulty:</strong> Beginner<br>
+                            <strong>Duration:</strong> 2 weeks</p>
+                            <div class="course-progress">
+                                <span>Your Progress: <span class="progress-text">0%</span></span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="progress-microgreens-courses"></div>
+                                </div>
+                            </div>
+                            <a href="#" class="btn view-course-btn">View Course Details</a>
+                            <a href="#" class="btn next-step-btn start-course-wizard" data-course="microgreens">START THIS COURSE <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 40px;">
+                    <a href="#" class="btn btn-secondary" id="view-all-courses-2">View all Courses</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Community Page -->
+    <div id="community-page" class="page">
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Community</h2>
+                <p style="text-align: center; margin-bottom: 40px; font-size: 1.2rem;">Connect with fellow gardeners, share experiences, and get advice.</p>
+                
+                <div class="community-container">
+                    <div class="qa-post">
+                        <h3>Recent Questions & Answers</h3>
+                        <div class="user-info">
+                            <div class="user-avatar">JG</div>
+                            <div>
+                                <strong>User: My Tomatoes Have yellow leaves, Help!</strong>
+                                <p>Posted 2 hours ago | 12 comments</p>
+                            </div>
+                        </div>
+                        <p>I've been growing tomatoes on my balcony for 2 months now, but recently the leaves have started turning yellow. I water them regularly and they get about 6 hours of sunlight. Any advice would be appreciated!</p>
+                        
+                        <div class="user-info" style="margin-top: 20px;">
+                            <div class="user-avatar">MS</div>
+                            <div>
+                                <strong>Expert: Yellow leaves could be overwatering</strong>
+                                <p>Posted 1 hour ago</p>
+                            </div>
+                        </div>
+                        <p>Yellow leaves on tomatoes can be a sign of overwatering. Check if the soil is dry about an inch down before watering again. Also ensure your pots have proper drainage.</p>
+                        
+                        <div style="margin-top: 20px;">
+                            <a href="#" class="btn join-discussion-next-step">JOIN DISCUSSION <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="group-card">
+                        <h3>Local Gardening Groups</h3>
+                        <p>Join "Urban Gardeners NYC Group!"</p>
+                        <p>Connect with fellow gardeners in your area, share tips, and participate in local seed swaps.</p>
+                        <p><strong>Members:</strong> 1,234</p>
+                        <a href="#" class="btn join-group-next-step">JOIN GROUP <i class="fas fa-arrow-right"></i></a>
+                        
+                        <div style="margin-top: 30px;">
+                            <h4>Find Groups in Your Area</h4>
+                            <input type="text" placeholder="Enter your city or ZIP code" style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 4px; border: 1px solid #ddd;">
+                            <button class="btn search-group-next-step" style="width: 100%;">SEARCH GROUPS <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Profile Page -->
+    <div id="profile-page" class="page">
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">My Profile</h2>
+                
+                <div class="profile-container">
+                    <div class="profile-sidebar">
+                        <div class="profile-header">
+                            <div class="profile-avatar" id="user-avatar">JD</div>
+                            <div class="profile-info">
+                                <h2 id="user-name">John Doe</h2>
+                                <p id="user-email">john@example.com</p>
+                                <p>Member since: <span id="member-since">June 2023</span></p>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-stats">
+                            <div class="stat-item">
+                                <div class="stat-value" id="courses-completed">0</div>
+                                <div class="stat-label">Courses Completed</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" id="active-projects-count">2</div>
+                                <div class="stat-label">Active Projects</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" id="community-posts">5</div>
+                                <div class="stat-label">Community Posts</div>
+                            </div>
+                        </div>
+                        
+                        <h3 style="margin-bottom: 15px; color: var(--primary-color);">Quick Actions</h3>
+                        <ul style="list-style: none;">
+                            <li style="margin-bottom: 10px;"><a href="#" class="btn next-step-btn" style="width: 100%; text-align: left; justify-content: flex-start;"><i class="fas fa-edit"></i> EDIT PROFILE <i class="fas fa-arrow-right" style="margin-left: auto;"></i></a></li>
+                            <li style="margin-bottom: 10px;"><a href="#" class="btn next-step-btn" style="width: 100%; text-align: left; justify-content: flex-start;"><i class="fas fa-lock"></i> CHANGE PASSWORD <i class="fas fa-arrow-right" style="margin-left: auto;"></i></a></li>
+                            <li style="margin-bottom: 10px;"><a href="#" class="btn next-step-btn" style="width: 100%; text-align: left; justify-content: flex-start;"><i class="fas fa-bell"></i> NOTIFICATION SETTINGS <i class="fas fa-arrow-right" style="margin-left: auto;"></i></a></li>
+                            <li><a href="#" class="btn next-step-btn" style="width: 100%; text-align: left; justify-content: flex-start;"><i class="fas fa-share-alt"></i> CONNECT SOCIAL ACCOUNTS <i class="fas fa-arrow-right" style="margin-left: auto;"></i></a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="profile-main">
+                        <h3 style="margin-bottom: 20px; color: var(--primary-color);">Recent Activity</h3>
+                        
+                        <div class="activity-feed">
+                            <div class="activity-item" style="padding: 15px; border-bottom: 1px solid #eee; margin-bottom: 15px;">
+                                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                                    <i class="fas fa-seedling" style="color: var(--primary-color);"></i>
+                                    <strong>Started a new course</strong>
+                                    <span style="margin-left: auto; color: var(--text-light); font-size: 0.9rem;">Today</span>
+                                </div>
+                                <p>You started "Vertical Gardening 101" course</p>
+                                <a href="#" class="btn next-step-btn" style="padding: 8px 15px; font-size: 0.9rem; margin-top: 10px;">CONTINUE COURSE <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                            
+                            <div class="activity-item" style="padding: 15px; border-bottom: 1px solid #eee; margin-bottom: 15px;">
+                                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                                    <i class="fas fa-comment" style="color: var(--secondary-color);"></i>
+                                    <strong>Posted in community</strong>
+                                    <span style="margin-left: auto; color: var(--text-light); font-size: 0.9rem;">2 days ago</span>
+                                </div>
+                                <p>You asked: "How often should I water my indoor herbs?"</p>
+                                <a href="#" class="btn next-step-btn" style="padding: 8px 15px; font-size: 0.9rem; margin-top: 10px;">VIEW DISCUSSION <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                            
+                            <div class="activity-item" style="padding: 15px; border-bottom: 1px solid #eee; margin-bottom: 15px;">
+                                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                                    <i class="fas fa-project-diagram" style="color: var(--primary-green);"></i>
+                                    <strong>Updated project</strong>
+                                    <span style="margin-left: auto; color: var(--text-light); font-size: 0.9rem;">1 week ago</span>
+                                </div>
+                                <p>You updated progress on "Balcony Herb Garden" to 75% complete</p>
+                                <a href="#" class="btn next-step-btn" style="padding: 8px 15px; font-size: 0.9rem; margin-top: 10px;">VIEW PROJECT <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                            
+                            <div class="activity-item" style="padding: 15px;">
+                                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                                    <i class="fas fa-users" style="color: var(--accent-gold);"></i>
+                                    <strong>Joined a group</strong>
+                                    <span style="margin-left: auto; color: var(--text-light); font-size: 0.9rem;">2 weeks ago</span>
+                                </div>
+                                <p>You joined "Urban Gardeners NYC Group"</p>
+                                <a href="#" class="btn next-step-btn" style="padding: 8px 15px; font-size: 0.9rem; margin-top: 10px;">VISIT GROUP <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>HarvestHub</h3>
+                    <p>Grow your own food, no matter how small your space. Join our community of urban gardeners today!</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#" class="nav-link" data-page="home">Home</a></li>
+                        <li><a href="#" class="nav-link" data-page="dashboard">Dashboard</a></li>
+                        <li><a href="#" class="nav-link" data-page="courses">Courses</a></li>
+                        <li><a href="#" class="nav-link" data-page="community">Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Connect With Us</h3>
+                    <ul>
+                        <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 HarvestHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Page Navigation System
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all pages and navigation links
+            const pages = document.querySelectorAll('.page');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const logo = document.getElementById('logo');
+            const signInBtn = document.getElementById('sign-in-btn');
+            const startCourseWizardBtn = document.getElementById('start-course-wizard-btn');
+            const gotoDashboardBtn = document.getElementById('goto-dashboard-btn');
+            const viewAllCourses = document.getElementById('view-all-courses');
+            const viewAllCourses2 = document.getElementById('view-all-courses-2');
+            const viewDiscussionBtn = document.getElementById('view-discussion-btn');
+            const viewCourseBtns = document.querySelectorAll('.view-course-btn');
+            
+            // Auth modal elements
+            const authModal = document.getElementById('auth-modal');
+            const closeAuthModal = document.getElementById('close-auth-modal');
+            const showSignup = document.getElementById('show-signup');
+            const showLogin = document.getElementById('show-login');
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+            const loginNextStep = document.getElementById('login-next-step');
+            const signupNextStep = document.getElementById('signup-next-step');
+            
+            // Course wizard elements
+            const courseWizardModal = document.getElementById('course-wizard-modal');
+            const closeCourseWizard = document.getElementById('close-course-wizard');
+            const startCourseWizardBtns = document.querySelectorAll('.start-course-wizard');
+            const courseOptions = document.querySelectorAll('.course-option[data-course]');
+            const planOptions = document.querySelectorAll('.course-option[data-plan]');
+            
+            // Wizard navigation elements
+            const wizardPages = document.querySelectorAll('.wizard-page');
+            const nextStep1 = document.getElementById('next-step-1');
+            const nextStep2 = document.getElementById('next-step-2');
+            const nextStep3 = document.getElementById('next-step-3');
+            const prevStep2 = document.getElementById('prev-step-2');
+            const prevStep3 = document.getElementById('prev-step-3');
+            const prevStep4 = document.getElementById('prev-step-4');
+            const startCourseNow = document.getElementById('start-course-now');
+            const finishWizard = document.getElementById('finish-wizard');
+            
+            // Step circles and labels
+            const stepCircles = document.querySelectorAll('.step-circle');
+            const stepLabels = document.querySelectorAll('.step-label');
+            
+            // Follow-up notification
+            const followUpNotification = document.getElementById('follow-up-notification');
+            const closeFollowUp = document.getElementById('close-follow-up');
+            const followUpMessage = document.getElementById('follow-up-message');
+            
+            // Profile elements
+            const userAvatar = document.getElementById('user-avatar');
+            const userName = document.getElementById('user-name');
+            const userEmail = document.getElementById('user-email');
+            const coursesCompleted = document.getElementById('courses-completed');
+            
+            // Track wizard state
+            let wizardState = {
+                currentStep: 1,
+                selectedCourse: null,
+                selectedPlan: null,
+                materialsStatus: null
+            };
+            
+            // Course materials data
+            const courseMaterials = {
+                vertical: `
+                    <h4>Materials needed for Vertical Gardening 101:</h4>
+                    <ul style="list-style-type: disc; padding-left: 20px; margin-top: 10px;">
+                        <li>Vertical planter or wall-mounted containers</li>
+                        <li>Potting soil (3-4 bags)</li>
+                        <li>Seeds or seedlings (lettuce, herbs, strawberries)</li>
+                        <li>Watering can or hose with spray attachment</li>
+                        <li>Gardening gloves</li>
+                        <li>Small hand trowel</li>
+                    </ul>
+                `,
+                herb: `
+                    <h4>Materials needed for Balcony Herb Essentials:</h4>
+                    <ul style="list-style-type: disc; padding-left: 20px; margin-top: 10px;">
+                        <li>Pots or containers with drainage holes (at least 3)</li>
+                        <li>Potting soil (2-3 bags)</li>
+                        <li>Herb seeds or starter plants (basil, mint, rosemary, thyme)</li>
+                        <li>Watering can</li>
+                        <li>Small pruning shears or scissors</li>
+                        <li>Organic fertilizer</li>
+                    </ul>
+                `,
+                microgreens: `
+                    <h4>Materials needed for DIY Microgreens for Beginners:</h4>
+                    <ul style="list-style-type: disc; padding-left: 20px; margin-top: 10px;">
+                        <li>Shallow trays or containers (3-4)</li>
+                        <li>Growing medium (coconut coir or potting soil)</li>
+                        <li>Microgreen seeds (sunflower, radish, broccoli, pea shoots)</li>
+                        <li>Spray bottle for misting</li>
+                        <li>Grow lights (optional but recommended)</li>
+                        <li>Sharp knife or scissors for harvesting</li>
+                    </ul>
+                `,
+                container: `
+                    <h4>Materials needed for Container Vegetable Gardening:</h4>
+                    <ul style="list-style-type: disc; padding-left: 20px; margin-top: 10px;">
+                        <li>Large containers (5-gallon minimum, 3-4 containers)</li>
+                        <li>High-quality potting soil (6-8 bags)</li>
+                        <li>Vegetable seedlings (tomatoes, peppers, cucumbers)</li>
+                        <li>Trellis or stakes for support</li>
+                        <li>Watering can or hose</li>
+                        <li>Organic fertilizer and compost</li>
+                    </ul>
+                `
+            };
+            
+            // Course names for display
+            const courseNames = {
+                vertical: "Vertical Gardening 101",
+                herb: "Balcony Herb Essentials",
+                microgreens: "DIY Microgreens for Beginners",
+                container: "Container Vegetable Gardening"
+            };
+            
+            // Plan names for display
+            const planNames = {
+                free: "Free Plan",
+                premium: "Premium Plan ($29.99)",
+                pro: "Pro Plan ($49.99)"
+            };
+            
+            // Track user progress
+            let userProgress = {
+                vertical: 0,
+                herb: 0,
+                microgreens: 0,
+                container: 0,
+                coursesCompleted: 0
+            };
+            
+            // Function to update course progress
+            function updateCourseProgress(courseId, progress) {
+                userProgress[courseId] = progress;
+                
+                // Update all progress bars for this course
+                const progressBars = document.querySelectorAll(`#progress-${courseId}, #progress-${courseId}-courses`);
+                const progressTexts = document.querySelectorAll(`.course-card .progress-text`);
+                
+                progressBars.forEach(bar => {
+                    bar.style.width = `${progress}%`;
+                });
+                
+                // Update text
+                progressTexts.forEach(text => {
+                    if (text.closest('.course-card') && text.closest('.course-card').querySelector('h3').textContent.toLowerCase().includes(courseId)) {
+                        text.textContent = `${progress}%`;
+                    }
+                });
+                
+                // Update courses completed count
+                if (progress === 100) {
+                    coursesCompleted.textContent = parseInt(coursesCompleted.textContent) + 1;
+                    userProgress.coursesCompleted = parseInt(coursesCompleted.textContent);
+                }
+                
+                // Save to localStorage
+                localStorage.setItem('userProgress', JSON.stringify(userProgress));
+            }
+            
+            // Function to show a specific page
+            function showPage(pageId) {
+                // Hide all pages
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                // Show the requested page
+                const activePage = document.getElementById(pageId + '-page');
+                if (activePage) {
+                    activePage.classList.add('active');
+                }
+                
+                // Update active nav link
+                navLinks.forEach(link => {
+                    if (link.getAttribute('data-page') === pageId) {
+                        link.style.color = 'var(--primary-color)';
+                        link.style.fontWeight = 'bold';
+                    } else {
+                        link.style.color = '';
+                        link.style.fontWeight = '';
+                    }
+                });
+                
+                // Scroll to top when changing pages
+                window.scrollTo(0, 0);
+            }
+            
+            // Function to show follow-up notification
+            function showFollowUp(message, delay = 2000) {
+                setTimeout(() => {
+                    followUpMessage.innerHTML = message;
+                    followUpNotification.style.display = 'block';
+                    
+                    // Auto-hide after 10 seconds
+                    setTimeout(() => {
+                        if (followUpNotification.style.display === 'block') {
+                            followUpNotification.style.display = 'none';
+                        }
+                    }, 10000);
+                }, delay);
+            }
+            
+            // Initialize course wizard
+            function initCourseWizard() {
+                // Reset wizard state
+                wizardState = {
+                    currentStep: 1,
+                    selectedCourse: null,
+                    selectedPlan: null,
+                    materialsStatus: null
+                };
+                
+                // Reset UI
+                courseOptions.forEach(option => option.classList.remove('selected'));
+                planOptions.forEach(option => option.classList.remove('selected'));
+                
+                // Reset step indicators
+                stepCircles.forEach((circle, index) => {
+                    circle.classList.remove('active', 'completed');
+                    if (index === 0) circle.classList.add('active');
+                });
+                
+                stepLabels.forEach((label, index) => {
+                    label.classList.remove('active');
+                    if (index === 0) label.classList.add('active');
+                });
+                
+                // Reset wizard pages
+                wizardPages.forEach(page => page.classList.remove('active'));
+                document.getElementById('wizard-page-1').classList.add('active');
+                
+                // Reset buttons
+                nextStep1.disabled = true;
+                nextStep2.disabled = true;
+                nextStep3.disabled = true;
+                
+                // Reset materials dropdown
+                document.getElementById('materials-ready').value = '';
+                
+                // Show modal
+                courseWizardModal.style.display = 'flex';
+            }
+            
+            // Function to update wizard step
+            function updateWizardStep(step) {
+                // Update current step
+                wizardState.currentStep = step;
+                
+                // Update step indicators
+                stepCircles.forEach((circle, index) => {
+                    circle.classList.remove('active', 'completed');
+                    if (index + 1 < step) {
+                        circle.classList.add('completed');
+                    } else if (index + 1 === step) {
+                        circle.classList.add('active');
+                    }
+                });
+                
+                stepLabels.forEach((label, index) => {
+                    label.classList.remove('active');
+                    if (index + 1 === step) {
+                        label.classList.add('active');
+                    }
+                });
+                
+                // Update wizard pages
+                wizardPages.forEach(page => page.classList.remove('active'));
+                document.getElementById(`wizard-page-${step}`).classList.add('active');
+            }
+            
+            // Function to update course summary
+            function updateCourseSummary() {
+                document.getElementById('summary-course').textContent = wizardState.selectedCourse ? courseNames[wizardState.selectedCourse] : 'None selected';
+                document.getElementById('summary-plan').textContent = wizardState.selectedPlan ? planNames[wizardState.selectedPlan] : 'None selected';
+                document.getElementById('summary-materials').textContent = wizardState.materialsStatus ? wizardState.materialsStatus.charAt(0).toUpperCase() + wizardState.materialsStatus.slice(1) : 'Not specified';
+                
+                // Update confirmation message
+                const message = wizardState.selectedPlan === 'free' 
+                    ? `Your free course "${courseNames[wizardState.selectedCourse]}" is ready to start!`
+                    : `Your ${planNames[wizardState.selectedPlan]} for "${courseNames[wizardState.selectedCourse]}" is ready to start!`;
+                
+                document.getElementById('confirmation-message').textContent = message;
+            }
+            
+            // Set up navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('data-page');
+                    showPage(pageId);
+                    
+                    // Show follow-up notification for navigation
+                    const pageTitles = {
+                        home: "Welcome to HarvestHub!",
+                        dashboard: "Your Gardening Dashboard",
+                        courses: "Browse Available Courses",
+                        community: "Connect with Gardeners",
+                        profile: "Your Profile Settings"
+                    };
+                    
+                    showFollowUp(`Now browsing: <strong>${pageTitles[pageId]}</strong>. Explore features and take your next step!`);
+                });
+            });
+            
+            // Logo click returns to home page
+            logo.addEventListener('click', function(e) {
+                e.preventDefault();
+                showPage('home');
+                showFollowUp("Welcome back to HarvestHub home! Start your gardening journey today.");
+            });
+            
+            // Sign in button shows auth modal
+            signInBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Check if already logged in
+                if (signInBtn.textContent === 'My Account') {
+                    showPage('profile');
+                    showFollowUp("Welcome back! Here's your profile where you can manage your account.");
+                    return;
+                }
+                
+                authModal.style.display = 'flex';
+                loginForm.classList.add('active');
+                signupForm.classList.remove('active');
+            });
+            
+            // Close auth modal
+            closeAuthModal.addEventListener('click', function() {
+                authModal.style.display = 'none';
+            });
+            
+            // Close course wizard modal
+            closeCourseWizard.addEventListener('click', function() {
+                courseWizardModal.style.display = 'none';
+            });
+            
+            // Close follow-up notification
+            closeFollowUp.addEventListener('click', function() {
+                followUpNotification.style.display = 'none';
+            });
+            
+            // Click outside modal to close
+            authModal.addEventListener('click', function(e) {
+                if (e.target === authModal) {
+                    authModal.style.display = 'none';
+                }
+            });
+            
+            courseWizardModal.addEventListener('click', function(e) {
+                if (e.target === courseWizardModal) {
+                    courseWizardModal.style.display = 'none';
+                }
+            });
+            
+            // Toggle between login and signup forms
+            showSignup.addEventListener('click', function(e) {
+                e.preventDefault();
+                loginForm.classList.remove('active');
+                signupForm.classList.add('active');
+                showFollowUp("Creating a new account? Fill in your details to get started!");
+            });
+            
+            showLogin.addEventListener('click', function(e) {
+                e.preventDefault();
+                signupForm.classList.remove('active');
+                loginForm.classList.add('active');
+                showFollowUp("Welcome back! Enter your credentials to continue your gardening journey.");
+            });
+            
+            // Login next step
+            loginNextStep.addEventListener('click', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+                
+                if (email && password) {
+                    // Simulate login process
+                    showFollowUp(`Welcome back! Logging in with email: ${email}`);
+                    
+                    // Update user info
+                    const nameFromEmail = email.split('@')[0];
+                    userName.textContent = nameFromEmail.charAt(0).toUpperCase() + nameFromEmail.slice(1);
+                    userEmail.textContent = email;
+                    userAvatar.textContent = nameFromEmail.substring(0, 2).toUpperCase();
+                    
+                    // Close modal and show dashboard
+                    authModal.style.display = 'none';
+                    showPage('dashboard');
+                    
+                    // Update sign in button to show user is logged in
+                    signInBtn.textContent = 'My Account';
+                    signInBtn.style.color = 'var(--primary-color)';
+                    signInBtn.style.fontWeight = 'bold';
+                    
+                    // Show welcome follow-up
+                    showFollowUp('Welcome back to HarvestHub! Check out new courses added this week.', 1000);
+                } else {
+                    showFollowUp('Please fill in both email and password fields to continue.');
+                }
+            });
+            
+            // Signup next step
+            signupNextStep.addEventListener('click', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('signup-name').value;
+                const email = document.getElementById('signup-email').value;
+                const password = document.getElementById('signup-password').value;
+                
+                if (name && email && password) {
+                    if (password.length < 8) {
+                        showFollowUp('Password must be at least 8 characters long. Please try again.');
+                        return;
+                    }
+                    
+                    // Simulate signup process
+                    showFollowUp(`Account created successfully! Welcome to HarvestHub, ${name}!`);
+                    
+                    // Update user info
+                    userName.textContent = name;
+                    userEmail.textContent = email;
+                    userAvatar.textContent = name.substring(0, 2).toUpperCase();
+                    
+                    // Close modal and show dashboard
+                    authModal.style.display = 'none';
+                    showPage('dashboard');
+                    
+                    // Update sign in button to show user is logged in
+                    signInBtn.textContent = 'My Account';
+                    signInBtn.style.color = 'var(--primary-color)';
+                    signInBtn.style.fontWeight = 'bold';
+                    
+                    // Show welcome follow-up
+                    showFollowUp(`Welcome to HarvestHub, ${name}! Start your first course to begin your gardening journey.`, 1000);
+                } else {
+                    showFollowUp('Please fill in all fields to create your account.');
+                }
+            });
+            
+            // Start course wizard from hero button
+            if (startCourseWizardBtn) {
+                startCourseWizardBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Check if user is logged in
+                    if (signInBtn.textContent === 'Sign In') {
+                        showFollowUp('Please sign in to start a course. Creating an account takes just a minute!');
+                        authModal.style.display = 'flex';
+                        return;
+                    }
+                    
+                    initCourseWizard();
+                    showFollowUp("Let's start your gardening journey! Choose a course that fits your space.");
+                });
+            }
+            
+            // Start course wizard from course cards
+            startCourseWizardBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Check if user is logged in
+                    if (signInBtn.textContent === 'Sign In') {
+                        showFollowUp('Please sign in to start this course. Sign up for free!');
+                        authModal.style.display = 'flex';
+                        return;
+                    }
+                    
+                    initCourseWizard();
+                    
+                    // Pre-select the course if clicked from a course card
+                    const courseId = this.getAttribute('data-course');
+                    if (courseId) {
+                        // Find and select the corresponding course option
+                        courseOptions.forEach(option => {
+                            if (option.getAttribute('data-course') === courseId) {
+                                option.click();
+                                showFollowUp(`Great choice! "${courseNames[courseId]}" selected. Now choose your learning plan.`);
+                            }
+                        });
+                    }
+                });
+            });
+            
+            // Course selection in wizard
+            courseOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove selection from all options
+                    courseOptions.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Select this option
+                    this.classList.add('selected');
+                    
+                    // Save selection
+                    wizardState.selectedCourse = this.getAttribute('data-course');
+                    
+                    // Enable next button
+                    nextStep1.disabled = false;
+                    
+                    // Show follow-up
+                    const courseName = courseNames[wizardState.selectedCourse];
+                    showFollowUp(`Selected: <strong>${courseName}</strong>. Click "NEXT STEP" to choose your learning plan.`);
+                    
+                    // Update materials content if we're on step 3
+                    if (wizardState.currentStep === 3) {
+                        document.getElementById('materials-content').innerHTML = courseMaterials[wizardState.selectedCourse] || '<p>Select a course in Step 1 to see required materials.</p>';
+                    }
+                });
+            });
+            
+            // Plan selection in wizard
+            planOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove selection from all options
+                    planOptions.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Select this option
+                    this.classList.add('selected');
+                    
+                    // Save selection
+                    wizardState.selectedPlan = this.getAttribute('data-plan');
+                    
+                    // Enable next button
+                    nextStep2.disabled = false;
+                    
+                    // Show follow-up
+                    const planName = planNames[wizardState.selectedPlan];
+                    showFollowUp(`Plan selected: <strong>${planName}</strong>. Click "NEXT STEP" to see required materials.`);
+                });
+            });
+            
+            // Materials status change
+            document.getElementById('materials-ready').addEventListener('change', function() {
+                wizardState.materialsStatus = this.value;
+                nextStep3.disabled = !this.value;
+                
+                if (this.value) {
+                    const statusMessages = {
+                        yes: "Great! You're ready to start. Click 'NEXT STEP' to confirm.",
+                        some: "That's okay! You can gather remaining materials as you progress.",
+                        no: "No problem! We'll help you find what you need. Click 'NEXT STEP' to continue."
+                    };
+                    showFollowUp(statusMessages[this.value]);
+                }
+            });
+            
+            // Wizard navigation
+            nextStep1.addEventListener('click', function() {
+                if (wizardState.selectedCourse) {
+                    updateWizardStep(2);
+                    showFollowUp("Step 2: Choose your learning plan. Free option available!");
+                }
+            });
+            
+            nextStep2.addEventListener('click', function() {
+                if (wizardState.selectedPlan) {
+                    // Update materials content based on selected course
+                    document.getElementById('materials-content').innerHTML = courseMaterials[wizardState.selectedCourse] || '<p>Select a course in Step 1 to see required materials.</p>';
+                    updateWizardStep(3);
+                    showFollowUp("Step 3: Check required materials. Don't worry if you don't have everything yet!");
+                }
+            });
+            
+            nextStep3.addEventListener('click', function() {
+                if (wizardState.materialsStatus) {
+                    updateCourseSummary();
+                    updateWizardStep(4);
+                    showFollowUp("Final Step: Review your course selection and get ready to start!");
+                }
+            });
+            
+            prevStep2.addEventListener('click', function() {
+                updateWizardStep(1);
+                showFollowUp("Back to course selection. Choose the one that's right for you!");
+            });
+            
+            prevStep3.addEventListener('click', function() {
+                updateWizardStep(2);
+                showFollowUp("Back to plan selection. Choose how you want to learn.");
+            });
+            
+            prevStep4.addEventListener('click', function() {
+                updateWizardStep(3);
+                showFollowUp("Back to materials checklist. Make sure you have what you need.");
+            });
+            
+            // Start course now button
+            startCourseNow.addEventListener('click', function() {
+                if (wizardState.selectedCourse) {
+                    // Close wizard
+                    courseWizardModal.style.display = 'none';
+                    
+                    // Update progress
+                    updateCourseProgress(wizardState.selectedCourse, 10);
+                    
+                    // Show success message
+                    showFollowUp(`Course "${courseNames[wizardState.selectedCourse]}" started successfully! Lesson 1 is now available.`);
+                    
+                    // Show another follow-up after delay
+                    setTimeout(() => {
+                        showFollowUp(`Don't forget to complete Lesson 1 within the next 3 days to stay on track!`, 5000);
+                    }, 7000);
+                    
+                    // Navigate to dashboard
+                    showPage('dashboard');
+                }
+            });
+            
+            // Finish wizard button
+            finishWizard.addEventListener('click', function() {
+                courseWizardModal.style.display = 'none';
+                showPage('dashboard');
+                
+                // Show follow-up if course was selected
+                if (wizardState.selectedCourse) {
+                    showFollowUp(`Your course "${courseNames[wizardState.selectedCourse]}" is saved to your dashboard. Start learning when you're ready!`);
+                }
+            });
+            
+            // Go to dashboard button
+            if (gotoDashboardBtn) {
+                gotoDashboardBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showPage('dashboard');
+                    showFollowUp("Welcome to your dashboard! Track your progress and manage your garden projects.");
+                });
+            }
+            
+            // View all courses button
+            if (viewAllCourses) {
+                viewAllCourses.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showPage('courses');
+                    showFollowUp("Browse all available courses. Filter by space type, difficulty, or duration.");
+                });
+            }
+            
+            if (viewAllCourses2) {
+                viewAllCourses2.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showPage('courses');
+                    showFollowUp("Browse all available courses. Filter by space type, difficulty, or duration.");
+                });
+            }
+            
+            // View discussion button
+            if (viewDiscussionBtn) {
+                viewDiscussionBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showPage('community');
+                    showFollowUp("Joining the tomato discussion. Share your experience and learn from others!");
+                });
+            }
+            
+            // View course buttons
+            viewCourseBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const courseTitle = this.closest('.course-content').querySelector('h3').textContent;
+                    showFollowUp(`Viewing course details: <strong>${courseTitle}</strong>. See goals, materials, and lesson breakdown.`);
+                    
+                    // Simulate opening course details
+                    setTimeout(() => {
+                        showFollowUp(`Ready to start "${courseTitle}"? Click the "START THIS COURSE" button to begin!`, 2000);
+                    }, 1500);
+                });
+            });
+            
+            // Dashboard navigation active state
+            const dashboardNavItems = document.querySelectorAll('.dashboard-nav li');
+            dashboardNavItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    dashboardNavItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Navigate to corresponding page
+                    const itemText = this.textContent.toLowerCase().trim();
+                    if (itemText.includes('profile')) {
+                        showPage('profile');
+                        showFollowUp("Viewing your profile. Update your information and see your progress.");
+                    } else if (itemText.includes('community')) {
+                        showPage('community');
+                        showFollowUp("Connecting with community. Ask questions and share your garden photos!");
+                    } else {
+                        showPage('dashboard');
+                        showFollowUp("Back to dashboard. Check your active projects and course progress.");
+                    }
+                });
+            });
+            
+            // Feed controls active state
+            const feedButtons = document.querySelectorAll('.feed-controls button');
+            feedButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    feedButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filterName = this.textContent;
+                    showFollowUp(`Filtering feed by: <strong>${filterName}</strong>. Viewing relevant content.`);
+                });
+            });
+            
+            // Add click functionality to GreenThumb navigation cards
+            const greenThumbCards = document.querySelectorAll('#dashboard-page .nav-card');
+            greenThumbCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const cardTitle = this.querySelector('h3').textContent;
+                    showFollowUp(`Navigating to: <strong>${cardTitle}</strong>. Access detailed features and tools.`);
+                });
+            });
+            
+            // Add interactivity to project cards
+            const projectCards = document.querySelectorAll('.project-card');
+            projectCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const projectName = this.querySelector('h4').textContent;
+                    showFollowUp(`Opening project: <strong>${projectName}</strong>. View progress, photos, and next steps.`);
+                });
+            });
+            
+            // Join group buttons
+            const joinGroupButtons = document.querySelectorAll('.join-group-next-step');
+            joinGroupButtons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showFollowUp("Request to join group sent! Connect with local gardeners in your area.");
+                });
+            });
+            
+            // Join discussion button
+            const joinDiscussionBtn = document.querySelector('.join-discussion-next-step');
+            if (joinDiscussionBtn) {
+                joinDiscussionBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showFollowUp("Joining discussion about tomato plants. Share your experience and get advice!");
+                });
+            }
+            
+            // Search groups button
+            const searchGroupBtn = document.querySelector('.search-group-next-step');
+            if (searchGroupBtn) {
+                searchGroupBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const locationInput = this.previousElementSibling;
+                    const location = locationInput.value || 'your area';
+                    showFollowUp(`Searching for gardening groups in <strong>${location}</strong>. Finding local connections...`);
+                });
+            }
+            
+            // Load saved progress from localStorage
+            const savedProgress = localStorage.getItem('userProgress');
+            if (savedProgress) {
+                userProgress = JSON.parse(savedProgress);
+                
+                // Update progress bars
+                for (const course in userProgress) {
+                    if (course !== 'coursesCompleted') {
+                        updateCourseProgress(course, userProgress[course]);
+                    }
+                }
+                
+                // Update courses completed
+                coursesCompleted.textContent = userProgress.coursesCompleted || 0;
+            }
+            
+            // Set initial page to home
+            showPage('home');
+            
+            // Show initial welcome message
+            setTimeout(() => {
+                showFollowUp("Welcome to HarvestHub! Click 'START A COURSE' to begin your gardening journey.", 1000);
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
